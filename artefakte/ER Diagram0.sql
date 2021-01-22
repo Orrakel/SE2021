@@ -77,28 +77,33 @@ ALTER TABLE matches ADD CONSTRAINT FK_match_1 FOREIGN KEY (lessoremail) REFERENC
 ALTER TABLE matches ADD CONSTRAINT FK_match_2 FOREIGN KEY (city,zip,street,housenumber,Usersemail) REFERENCES Apartment (city,zip,street,housenumber,email);
 
 
-INSERT INTO `lessor` (`email`, password) 
+INSERT INTO lessor (email, password) 
 VALUES 
-('nkoetter@e-mail.de', '1234'), ('wreger@e-mail.de', '4321');
+('nkoetter@e-mail.de', '1234'), 
+('wreger@e-mail.de', '4321');
 
-INSERT INTO `Users` (`email`, `password`, `Firstname`, `Lastname`, `age`, `picture`, `income`, `job`, `schufa`, `pet`, `persons`) 
+INSERT INTO Users (email, password, Firstname, Lastname, age, picture, income, job, schufa, pet, persons) 
 VALUES 
-('wreger@e-mail.de', '4321', 'Waldemar', 'Reger', '25', 'Waldemar', '5000', 'IT', 'yes', 'yes', '3');
+('kneitmann@e-mail.de', '4321', 'Waldemar', 'Reger', '25', 'Waldemar', '5000', 'IT', 'yes', 'yes', '3');
 
-INSERT INTO `apartment` (`city`, `zip`, `street`, `housenumber`, `email`, `size`, `petallowed`, `room`, `costs`, `commercialusage`, `furnishing`, `description`) 
+INSERT INTO Users (email, password, Firstname, Lastname, age, picture, income, job, schufa, pet, persons) 
 VALUES 
-('Minden', '12345', 'Mindenstraße', '5a', 'nkoetter@e-mail.de', '450', 'yes', '4', '500', 'no', 'yes', 'Billiges Apartment mit großen Räumen und sogar Badezimmer.'), 
-('Bad Salzuflen', '32107', 'Detmolder Weg', '3a', 'nkoetter@e-mail.de', '120', 'yes', '2', '750', 'no', 'yes', 'Hier wohnte eine Berühmtheit, das ist wahr, glauben sie mir.'),
-('Berlin', '66666', 'Berliner Weg', '666', 'wreger@e-mail.de', '20', 'no', '1', '3000', 'yes', 'no', 'Klein, aber fein und das zu einem billigen Preis.'), 
-('Bielefeld', '33881', 'Telefonstraße', '1', 'wreger@e-mail.de', '220', 'no', '3', '450', 'no', 'no', 'Eine Wohnung in Bielefeld');
+('anolting@e-mail.de', '1234', 'Alexander', 'Nolting', '28', 'Noltinger', '5000', 'IT', 'yes', 'yes', '3');
 
-INSERT INTO `likes` (`city`, `zip`, `street`, `housenumber`, `email`, `email_0`) 
+INSERT INTO apartment (city, zip, street, housenumber, email, size, petallowed, room, costs, commercialusage, furnishing, description) 
 VALUES 
-('Bad Salzuflen', '32107', 'Detmolder Weg', '3a', 'kneitmann@e-mail.de', 'nkoetter@e-mail.de');
+('Minden', '12345', 'Mindenstraße', '5', 'nkoetter@e-mail.de', '450', 'yes', '4', '500', 'no', 'yes', 'BilligesApartmentmitgroßenRäumenundsogarBadezimmer.'), 
+('BadSalzuflen', '32107', 'DetmolderWeg', '3', 'nkoetter@e-mail.de', '120', 'yes', '2', '750', 'no', 'yes', 'HierwohnteeineBerühmtheitdasistwahrglaubensiemir.'),
+('Berlin', '66666', 'BerlinerWeg', '666', 'wreger@e-mail.de', '20', 'no', '1', '3000', 'yes', 'no', 'KleinaberfeinunddaszueinembilligenPreis.'), 
+('Bielefeld', '33881', 'Telefonstraße', '1', 'wreger@e-mail.de', '220', 'no', '3', '450', 'no', 'no', 'EineWohnunginBielefeld');
 
-INSERT INTO `matches` (`Usersemail`, `lessoremail`, `city`, `zip`, `street`, `housenumber`) 
+INSERT INTO likes (city, zip, street, housenumber, email, email_0) 
 VALUES 
-('nkoetter@e-mail.de', 'kneitmann@e-mail.de', 'Minden', '12345', 'Mindenstraße', '5a');
+('BadSalzuflen', '32107', 'DetmolderWeg', '3', 'kneitmann@e-mail.de', 'nkoetter@e-mail.de');
+
+INSERT INTO matches (Usersemail, lessoremail, city, zip, street, housenumber) 
+VALUES 
+('nkoetter@e-mail.de', 'kneitmann@e-mail.de', 'Minden', '12345', 'Mindenstraße', '5');
 
 
 

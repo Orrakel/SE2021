@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|top"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/app_name"
+        android:textColor="#FF03"
+        android:textSize="40sp">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/email_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="30dp"
+        android:text="Email"
+        android:textColor="#000">
+
+    </TextView>
+
+    <EditText
+        android:id="@+id/email_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="max.mustermann@gmail.com">
+
+    </EditText>
+
+    <TextView
+        android:id="@+id/password_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:text="Passwort"
+
+        android:textColor="#000">
+
+    </TextView>
+
+    <EditText
+        android:id="@+id/password_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Passwort"
+        android:inputType="textPassword">
+
+    </EditText>
+
+        <TextView
+            android:id="@+id/passwordrp_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:text="Passwort wiederholen"
+
+            android:textColor="#000">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/passwordrp_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Passwort"
+            android:inputType="textPassword">
+
+        </EditText>
+
+    <Button
+        android:id="@+id/create_account_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Account erstellen"
+        android:textAllCaps="false">
+
+    </Button>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

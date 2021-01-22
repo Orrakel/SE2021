@@ -18,10 +18,10 @@ $sql .= "and housenumber not in(select housenumber from matches)";
 
 $output = "";
 
-$output .= '{"apartments":';
+$output .= '{"apartments":[';
 
 foreach ($db->query($sql) as $row) {
-   $output .= "[";
+   $output .= "{";
    $output .= '"city":' . $row['city'] . ",";
    $output .= '"zip":' . $row['zip'] . ",";
    $output .= '"street":' . $row['street'] . ",";
@@ -31,13 +31,13 @@ foreach ($db->query($sql) as $row) {
    $output .= '"petallowed":' . $row['petallowed'] . ",";  
    $output .= '"room":' . $row['room'] . ",";  
    $output .= '"costs":' . $row['costs'] . ",";  
-   $output .= '"commercialusage":' . $row['commercialusage'];  
-   $output .= '"furnishing":' . $row['furnishing'];  
+   $output .= '"commercialusage":' . $row['commercialusage'] . ",";  
+   $output .= '"furnishing":' . $row['furnishing'] . ",";  
    $output .= '"description":' . $row['description'];  
-   $output .= "],";
+   $output .= "},";
 }
 
-$output .= "}";
+$output .= "]}";
 
 echo str_replace("],}", "]}", $output);
 

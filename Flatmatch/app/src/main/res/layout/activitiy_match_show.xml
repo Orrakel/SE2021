@@ -7,15 +7,162 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingStart="10dp">
 
         <TextView
+            android:id="@+id/cityMatchShow_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="MATCH SHOW"
-            android:textSize="40sp"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </TextView>
+        <TextView
+            android:id="@+id/zipMatchShow_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MATCH SHOW"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </TextView>
+        <TextView
+            android:id="@+id/streetMatchShow_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MATCH SHOW"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </TextView>
+        <TextView
+            android:id="@+id/houseNumberMatchShow_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MATCH SHOW"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </TextView>
+        <TextView
+            android:id="@+id/emailMatchShow_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MATCH SHOW"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </TextView>
+        <TextView
+            android:id="@+id/sizeMatchShow_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MATCH SHOW"
+            android:textSize="24sp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </TextView>
+        <TextView
+            android:id="@+id/arePetAllowedatchShow_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MATCH SHOW"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </TextView>
+        <TextView
+            android:id="@+id/roomsMatchShow_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MATCH SHOW"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </TextView>
+        <TextView
+            android:id="@+id/costsMatchShow_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MATCH SHOW"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </TextView>
+        <TextView
+            android:id="@+id/commercialUsageAllowedMatchShow_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MATCH SHOW"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </TextView>
+        <TextView
+            android:id="@+id/furnishingPresentMatchShow_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MATCH SHOW"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </TextView>
+        <TextView
+            android:id="@+id/decriptionMatchShow_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MATCH SHOW"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -24,7 +171,7 @@
 
         </TextView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navView"

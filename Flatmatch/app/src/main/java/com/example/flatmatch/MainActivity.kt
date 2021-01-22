@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
+import com.example.flatmatch.Data.Apartment
+import com.example.flatmatch.Model.ApartmentModel
 import com.example.flatmatch.Model.UserModel
 import com.example.flatmatch.Presenter.CreateAccount
 import com.example.flatmatch.Presenter.ForgotPassword
@@ -15,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         login_btn.setOnClickListener {
 

@@ -51,4 +51,5 @@ public class Apartment {
     public String getFurnishingYesNo() { return this.furnishingPresent?"yes":"no"; }
 
     public String getDescription() { return this.description; }
+    public float getCosts() { return this.costs; }
 }

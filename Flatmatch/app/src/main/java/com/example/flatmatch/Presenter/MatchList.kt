@@ -8,7 +8,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.flatmatch.Data.Apartment
-import com.example.flatmatch.Data.Flat
 import com.example.flatmatch.Model.ApartmentModel
 import com.example.flatmatch.Model.FlatAdapter
 import com.example.flatmatch.R
@@ -43,67 +42,12 @@ class MatchList : AppCompatActivity(), FlatAdapter.OnItemClickListener{
             }
             true
         }
-        var test =  ApartmentModel.getAllApartments()
+        //var test =  ApartmentModel.getAllApartments()
         //val city = test[0].city.toString()
-        // DATEN HOLEN Nick pls halp
-        matchList = mutableListOf(
-            Apartment(
-                "city",
-                "",
-                "",
-                "",
-                10.0f,
-                true,
-                3,
-                5.5f,
-                true,
-                false,
-                "",
-                ""
-            ),
-            Apartment(
-                "Minden",
-                "",
-                "",
-                "",
-                10.0f,
-                true,
-                3,
-                5.5f,
-                true,
-                false,
-                "",
-                ""
-            ),
-            Apartment(
-                "Bad Oeynhausen",
-                "",
-                "",
-                "",
-                10.0f,
-                true,
-                3,
-                5.5f,
-                true,
-                false,
-                "",
-                ""
-            ),
-            Apartment(
-                "Lübbecke",
-                "",
-                "",
-                "",
-                10.0f,
-                true,
-                3,
-                5.5f,
-                true,
-                false,
-                "",
-                ""
-            )
-        )
+        //var test2: ArrayList<Apartment> = ApartmentModel.getAllApartments()
+        val apa: ArrayList<Apartment> = ApartmentModel.getAllApartments()
+        matchList = ApartmentModel.getAllApartments().toMutableList()
+
 
         val adapter = FlatAdapter(matchList, this)
         rvMatches.adapter = adapter
@@ -123,6 +67,10 @@ class MatchList : AppCompatActivity(), FlatAdapter.OnItemClickListener{
     override fun onItemClick(position: Int) {
         Toast.makeText(this, "Item $position clicked", Toast.LENGTH_SHORT).show()
         val clickedItem = matchList[position]
-        startActivity(Intent(this, MatchShow::class.java))
+        Intent(this, MatchShow::class.java).also{
+            it.putExtra("position",position)
+            startActivity(it)
+        }
+
     }
 }

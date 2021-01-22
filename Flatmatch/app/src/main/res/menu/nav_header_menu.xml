@@ -18,4 +18,9 @@
         android:title="Filter">
 
     </item>
+
+    <item
+        android:id="@+id/mSettings"
+        android:title="Settings">
+    </item>
 </menu>

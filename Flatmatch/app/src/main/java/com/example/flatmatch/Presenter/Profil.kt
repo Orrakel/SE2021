@@ -1,14 +1,13 @@
-package com.example.myapplication2
+package com.example.flatmatch.Presenter
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activitiy_main_page.*
+import com.example.flatmatch.R
 import kotlinx.android.synthetic.main.activitiy_profil.*
-import kotlinx.android.synthetic.main.activitiy_main_page.drawerLayout as drawerLayout1
-import kotlinx.android.synthetic.main.activitiy_profil.navView as navView1
+
 
 class Profil: AppCompatActivity(){
 
@@ -18,7 +17,10 @@ class Profil: AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activitiy_profil)
 
-        toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
+        toggle = ActionBarDrawerToggle(this, drawerLayout,
+            R.string.open,
+            R.string.close
+        )
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 

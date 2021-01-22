@@ -1,4 +1,4 @@
-package com.example.myapplication2
+package com.example.flatmatch.Data
 
 data class Flat (
         val city: String,

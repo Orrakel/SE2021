@@ -1,9 +1,11 @@
-package com.example.myapplication2
+package com.example.flatmatch.Model
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.flatmatch.Data.Flat
+import com.example.flatmatch.R
 import kotlinx.android.synthetic.main.item_flat.view.*
 
 class FlatAdapter(var flats: List<Flat>, val listener: OnItemClickListener) : RecyclerView.Adapter<FlatAdapter.FlatViewHolder>() {

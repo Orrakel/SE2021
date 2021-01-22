@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.myapplication2">
+    package="com.example.flatmatch">
 
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,20 +14,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication2">
         android:usesCleartextTraffic="true"
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.flatmatch.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ForgotPassword" />
-        <activity android:name=".CreateAccount" />
-        <activity android:name=".MainPage" />
-        <activity android:name=".MatchList" />
-        <activity android:name=".MatchShow" />
-        <activity android:name=".Profil" />
-        <activity android:name=".Settings" />
+        <activity android:name="com.example.flatmatch.Presenter.ForgotPassword" />
+        <activity android:name="com.example.flatmatch.Presenter.CreateAccount" />
+        <activity android:name="com.example.flatmatch.Presenter.MainPage" />
+        <activity android:name="com.example.flatmatch.Presenter.MatchList" />
+        <activity android:name="com.example.flatmatch.Presenter.MatchShow" />
+        <activity android:name="com.example.flatmatch.Presenter.Profil" />
+        <activity android:name="com.example.flatmatch.Presenter.Settings" />
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.example.myapplication2
+package com.example.flatmatch.Presenter
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.MotionEvent
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.flatmatch.R
 import kotlinx.android.synthetic.main.activitiy_main_page.*
 import kotlin.math.abs
 
@@ -30,7 +31,10 @@ class MainPage : AppCompatActivity(), GestureDetector.OnGestureListener {
 
         gestureDetector = GestureDetector(this, this)
 
-        toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
+        toggle = ActionBarDrawerToggle(this, drawerLayout,
+            R.string.open,
+            R.string.close
+        )
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 

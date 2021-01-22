@@ -1,9 +1,11 @@
-package com.example.myapplication2
+package com.example.flatmatch.Presenter
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.flatmatch.MainActivity
+import com.example.flatmatch.R
 import kotlinx.android.synthetic.main.activity_forgot_password.*
 
 class ForgotPassword : AppCompatActivity() {

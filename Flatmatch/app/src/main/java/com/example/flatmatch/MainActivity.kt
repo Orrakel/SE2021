@@ -1,10 +1,13 @@
-package com.example.myapplication2
+package com.example.flatmatch
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
+import com.example.flatmatch.Presenter.CreateAccount
+import com.example.flatmatch.Presenter.ForgotPassword
+import com.example.flatmatch.Presenter.MainPage
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

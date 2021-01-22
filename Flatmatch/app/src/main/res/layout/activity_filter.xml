@@ -138,7 +138,7 @@
                 android:textColor="#F000">
             </TextView>
 
-            
+
             <EditText
                 android:id="@+id/job_et"
                 android:layout_width="50dp"

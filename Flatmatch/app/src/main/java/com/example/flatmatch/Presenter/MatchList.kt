@@ -44,7 +44,7 @@ class MatchList : AppCompatActivity(), FlatAdapter.OnItemClickListener{
             true
         }
         var test =  ApartmentModel.getAllApartments()
-        val city = test[0].city.toString()
+        //val city = test[0].city.toString()
         // DATEN HOLEN Nick pls halp
         matchList = mutableListOf(
             Apartment(

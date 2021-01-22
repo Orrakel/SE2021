@@ -40,7 +40,7 @@ public class LessorModel {
         BufferedReader br = null;
 
         try {
-            selectUser = new URL("http://192.168.43.35/flatmatch/selectLessor.php?email=" + email + "&password=" + password);
+            selectUser = new URL("http://192.168.178.137/flatmatch/selectLessor.php?email=" + email + "&password=" + password);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -102,7 +102,7 @@ public class LessorModel {
                 "('" + newLessor.getEmail() + "', '"+ password + "')";
 
         try {
-            selectUser = new URL("http://192.168.43.35/flatmatch/insert.php?sql=" + sql);
+            selectUser = new URL("http://192.168.178.137/flatmatch/insert.php?sql=" + sql);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

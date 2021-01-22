@@ -31,7 +31,7 @@ public class ApartmentModel {
         ArrayList<Apartment> apartments = null;
 
         try {
-            selectUser = new URL("http://192.168.43.35/flatmatch/selectAllApartment.php");
+            selectUser = new URL("http://192.168.178.137/flatmatch/selectAllApartment.php");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -75,7 +75,7 @@ public class ApartmentModel {
         ArrayList<Apartment> apartments = null;
 
         try {
-            selectUser = new URL("http://192.168.43.35/flatmatch/selectApartment.php");
+            selectUser = new URL("http://192.168.178.137/flatmatch/selectApartment.php");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -108,11 +108,11 @@ public class ApartmentModel {
     }
 
     private static ArrayList<Apartment> buildApartmentList(String input) throws JSONException {
-        ArrayList<Apartment> apartments = null;
+        ArrayList<Apartment> apartments = new ArrayList<>();
         JSONObject apartmentsInput = new JSONObject(input);
         JSONArray allApartments = apartmentsInput.getJSONArray("apartments");
 
-        for( int i = 0 ; i < allApartments.length() ; i++) {
+        for( int i = 0 ; i < allApartments.length()-1 ; i++) {
             Apartment apartment = new Apartment(allApartments.getJSONObject(i).getString("city"),
                     allApartments.getJSONObject(i).getString("zip"),
                     allApartments.getJSONObject(i).getString("street"),
@@ -154,7 +154,7 @@ public class ApartmentModel {
                 "'" + newApartment.getDescription() + "')";
 
         try {
-            insertApartment = new URL("http://192.168.43.35/flatmatch/insert.php?sql=" + sql);
+            insertApartment = new URL("http://192.168.178.137/flatmatch/insert.php?sql=" + sql);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -171,7 +171,7 @@ public class ApartmentModel {
         ArrayList<Apartment> apartments = null;
 
         try {
-            selectUser = new URL("http://192.168.43.35/flatmatch/selectLessorApartment.php?email=" + Data.getLoggedInLessor().getEmail());
+            selectUser = new URL("http://192.168.178.137/flatmatch/selectLessorApartment.php?email=" + Data.getLoggedInLessor().getEmail());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

@@ -7,7 +7,9 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.flatmatch.Data.Apartment
 import com.example.flatmatch.Data.Flat
+import com.example.flatmatch.Model.ApartmentModel
 import com.example.flatmatch.Model.FlatAdapter
 import com.example.flatmatch.R
 import kotlinx.android.synthetic.main.activitiy_main_page.drawerLayout
@@ -17,7 +19,7 @@ import kotlinx.android.synthetic.main.activitiy_match_list.*
 class MatchList : AppCompatActivity(), FlatAdapter.OnItemClickListener{
 
     lateinit var toggle: ActionBarDrawerToggle
-    private lateinit var matchList: MutableList<Flat>
+    private lateinit var matchList: MutableList<Apartment>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,146 +43,63 @@ class MatchList : AppCompatActivity(), FlatAdapter.OnItemClickListener{
             }
             true
         }
-
+        var test =  ApartmentModel.getAllApartments()
+        val city = test[0].city.toString()
         // DATEN HOLEN Nick pls halp
         matchList = mutableListOf(
-            Flat(
+            Apartment(
+                "city",
+                "",
+                "",
+                "",
+                10.0f,
+                true,
+                3,
+                5.5f,
+                true,
+                false,
+                "",
+                ""
+            ),
+            Apartment(
                 "Minden",
                 "",
-                "gehirnstraße",
                 "",
                 "",
-                "",
-                "",
-                "",
-                "",
-                "",
+                10.0f,
+                true,
+                3,
+                5.5f,
+                true,
+                false,
                 "",
                 ""
             ),
-            Flat(
+            Apartment(
+                "Bad Oeynhausen",
+                "",
+                "",
+                "",
+                10.0f,
+                true,
+                3,
+                5.5f,
+                true,
+                false,
+                "",
+                ""
+            ),
+            Apartment(
                 "Lübbecke",
-                "test",
-                "1.0straße",
                 "",
                 "",
                 "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
-            ),
-            Flat(
-                "Espelkamp",
-                "test",
-                "Straße",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
-            ),
-            Flat(
-                "Stemwede",
-                "test",
-                "Straße",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
-            ),
-            Flat(
-                "Hille",
-                "test",
-                "Straße",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
-            ),
-            Flat(
-                "Bielefeld",
-                "test",
-                "Straße",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
-            ),
-            Flat(
-                "Hannover",
-                "test",
-                "Straße",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
-            ),
-            Flat(
-                "Köln",
-                "test",
-                "Straße",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
-            ),
-            Flat(
-                "Winterfell",
-                "test",
-                "Straße",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
-            ),
-            Flat(
-                "Ba Sing Se",
-                "test",
-                "test",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
+                10.0f,
+                true,
+                3,
+                5.5f,
+                true,
+                false,
                 "",
                 ""
             )

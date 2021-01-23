@@ -31,7 +31,7 @@ public class ApartmentModel {
         ArrayList<Apartment> apartments = null;
 
         try {
-            selectUser = new URL("http://192.168.178.137/flatmatch/selectAllApartment.php");
+            selectUser = new URL("http://192.168.43.35/flatmatch/selectAllApartment.php");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -75,7 +75,7 @@ public class ApartmentModel {
         ArrayList<Apartment> apartments = null;
 
         try {
-            selectUser = new URL("http://192.168.178.137/flatmatch/selectApartment.php");
+            selectUser = new URL("http://192.168.43.35/flatmatch/selectApartment.php");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -149,12 +149,13 @@ public class ApartmentModel {
                 "'" + newApartment.getSize() + "', " +
                 "'" + newApartment.getPetallowedYesNo() + "', " +
                 "'" + newApartment.getRoom() + "', " +
+                "'" + newApartment.getCosts() + "', " +
                 "'" + newApartment.getCommercialusageYesNo() + "', " +
                 "'" + newApartment.getFurnishingYesNo() + "', " +
                 "'" + newApartment.getDescription() + "')";
 
         try {
-            insertApartment = new URL("http://192.168.178.137/flatmatch/insert.php?sql=" + sql);
+            insertApartment = new URL("http://192.168.43.35/flatmatch/insert.php?sql=" + sql);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -171,7 +172,7 @@ public class ApartmentModel {
         ArrayList<Apartment> apartments = null;
 
         try {
-            selectUser = new URL("http://192.168.178.137/flatmatch/selectLessorApartment.php?email=" + Data.getLoggedInLessor().getEmail());
+            selectUser = new URL("http://192.168.43.35/flatmatch/selectLessorApartment.php?email=" + Data.getLoggedInLessor().getEmail());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

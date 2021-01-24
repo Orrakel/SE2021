@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import com.example.flatmatch.Data.Apartment
+import com.example.flatmatch.Data.Data
 import com.example.flatmatch.Model.ApartmentModel
 import com.example.flatmatch.Model.UserModel
 import com.example.flatmatch.Presenter.CreateAccount
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, status, LENGTH_SHORT).show()
             if(status.equals("Login Erfolgreich"))
             {
+
                 val intent = Intent(this, MainPage::class.java)
                 startActivity(intent)
             }

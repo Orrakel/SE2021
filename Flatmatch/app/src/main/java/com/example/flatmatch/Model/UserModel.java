@@ -37,7 +37,7 @@ public class UserModel {
         BufferedReader br = null;
 
         try {
-            selectUser = new URL("http://192.168.43.35/flatmatch/selectUser.php?email=" + loginName + "&password=" + password);
+            selectUser = new URL("http://192.168.43.29/flatmatch/selectUser.php?email=" + loginName + "&password=" + password);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -116,7 +116,7 @@ public class UserModel {
                 "'" + newUser.getPersons() + "')";
 
         try {
-            selectUser = new URL("http://192.168.43.35/flatmatch/insert.php?sql=" + sql);
+            selectUser = new URL("http://192.168.43.29/flatmatch/insert.php?sql=" + sql);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

@@ -29,7 +29,7 @@
             android:gravity="left">
 
             <TextView
-                android:id="@+id/city_tv"
+                android:id="@+id/filter_city_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Stadt"
@@ -38,7 +38,7 @@
             </TextView>
 
             <EditText
-                android:id="@+id/city_et"
+                android:id="@+id/filter_city_et"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:hint="Minden"
@@ -47,6 +47,7 @@
             </EditText>
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,42 +55,16 @@
             android:gravity="left">
 
             <TextView
-                android:id="@+id/street_tv"
+                android:id="@+id/filter_sizemin_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Straße"
+                android:text="Min Quadratmeter"
                 android:layout_weight="3"
                 android:textColor="#F000">
             </TextView>
 
             <EditText
-                android:id="@+id/street_et"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:hint=""
-                android:layout_weight="1"
-                android:inputType="text">
-
-            </EditText>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="left">
-
-            <TextView
-                android:id="@+id/houseNumber_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hausnummer"
-                android:layout_weight="3"
-                android:textColor="#F000">
-            </TextView>
-
-            <EditText
-                android:id="@+id/houseNumber_et"
+                android:id="@+id/filter_sizemin_et"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:hint=""
@@ -105,16 +80,16 @@
             android:gravity="left">
 
             <TextView
-                android:id="@+id/size_tv"
+                android:id="@+id/filter_sizemax_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Quadratmeter"
+                android:text="Max Quadratmeter"
                 android:layout_weight="3"
                 android:textColor="#F000">
             </TextView>
 
             <EditText
-                android:id="@+id/size_et"
+                android:id="@+id/filter_sizemax_et"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:hint=""
@@ -130,17 +105,17 @@
             android:gravity="left">
 
             <TextView
-                android:id="@+id/petFilter_tv"
+                android:id="@+id/filter_roomsmin_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Haustiere"
+                android:text="Min Räume"
                 android:layout_weight="3"
                 android:textColor="#F000">
             </TextView>
 
 
             <EditText
-                android:id="@+id/job_et"
+                android:id="@+id/filter_roomsmin_et"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:hint=""
@@ -156,16 +131,16 @@
             android:gravity="left">
 
             <TextView
-                android:id="@+id/age_tv"
+                android:id="@+id/filter_roomsmax_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Alter"
+                android:text="Max Räume"
                 android:layout_weight="3"
                 android:textColor="#F000">
             </TextView>
 
             <EditText
-                android:id="@+id/age_et"
+                android:id="@+id/filter_roomsmax_et"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:hint=""
@@ -181,26 +156,21 @@
             android:gravity="left">
 
             <TextView
-                android:id="@+id/pet_tv"
+                android:id="@+id/filter_pet_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Haustier"
                 android:layout_weight="3"
-                android:textColor="#F000">
-            </TextView>
+                android:textColor="#F000" />
+
 
             <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/filter_petyes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ja"
-                android:layout_weight="1">
-
-            </com.google.android.material.checkbox.MaterialCheckBox>
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="nein"
-                android:layout_weight="1">
+                android:text="Ja"
+                android:layout_weight="1"
+                >
 
             </com.google.android.material.checkbox.MaterialCheckBox>
 
@@ -212,16 +182,16 @@
             android:gravity="left">
 
             <TextView
-                android:id="@+id/schufa_tv"
+                android:id="@+id/filter_costsmin_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Schufa"
+                android:text="Min Kosten"
                 android:layout_weight="3"
                 android:textColor="#F000">
             </TextView>
 
             <EditText
-                android:id="@+id/schufa_et"
+                android:id="@+id/filter_costsmin_et"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:hint=""
@@ -231,8 +201,87 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="left">
+
+            <TextView
+                android:id="@+id/filter_costsmax_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Max Kosten"
+                android:layout_weight="3"
+                android:textColor="#F000">
+            </TextView>
+
+            <EditText
+                android:id="@+id/filter_costsmax_et"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:hint=""
+                android:layout_weight="1">
+
+            </EditText>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="left">
+
+            <TextView
+                android:id="@+id/filter_commercialUsage_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Commercial Usage"
+                android:layout_weight="3"
+                android:textColor="#F000" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/filter_commercialUsageYes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ja"
+                android:layout_weight="1"
+                >
+
+            </com.google.android.material.checkbox.MaterialCheckBox>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="left">
+
+            <TextView
+                android:id="@+id/filter_furnishing_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Einbausachen"
+                android:layout_weight="3"
+                android:textColor="#F000" />
+
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/filter_furnishingYes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ja"
+                android:layout_weight="1"
+                >
+
+            </com.google.android.material.checkbox.MaterialCheckBox>
+
+        </LinearLayout>
+
         <Button
-            android:id="@+id/safe_profil_btn"
+            android:id="@+id/filter_safeFilter_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Speichern"

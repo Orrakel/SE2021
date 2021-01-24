@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/popUp_image"
+        android:layout_width="325dp"
+        android:layout_height="271dp"
+        android:background="@drawable/noimage"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/popUp_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popUp_image"
+        android:layout_marginTop="20dp"
+        android:textSize="15sp"
+        android:textColor="@color/black">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/popUp_cost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popUp_city"
+        android:textSize="15sp"
+        android:textColor="@color/black">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/popUp_zip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popUp_cost"
+        android:textSize="15sp"
+        android:textColor="@color/black">
+
+    </TextView>
+    <TextView
+        android:id="@+id/popUp_street"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popUp_zip"
+        android:textSize="15sp"
+        android:textColor="@color/black">
+
+    </TextView>
+    <TextView
+        android:id="@+id/popUp_houseNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popUp_street"
+        android:textSize="15sp"
+        android:textColor="@color/black">
+
+    </TextView>
+    <TextView
+        android:id="@+id/popUp_size"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popUp_houseNumber"
+        android:textSize="15sp"
+        android:textColor="@color/black">
+
+    </TextView>
+    <TextView
+        android:id="@+id/popUp_arePetsAllowed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popUp_size"
+        android:textSize="15sp"
+        android:textColor="@color/black">
+
+    </TextView>
+    <TextView
+        android:id="@+id/popUp_commercialUsageAllowed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popUp_arePetsAllowed"
+        android:textSize="15sp"
+        android:textColor="@color/black">
+
+    </TextView>
+    <TextView
+        android:id="@+id/popUp_furnishingPresent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popUp_commercialUsageAllowed"
+        android:textSize="15sp"
+        android:textColor="@color/black">
+
+    </TextView>
+    <TextView
+        android:id="@+id/popUp_rooms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popUp_furnishingPresent"
+        android:textSize="15sp"
+        android:textColor="@color/black">
+
+    </TextView>
+    <TextView
+        android:id="@+id/popUp_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popUp_rooms"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:scrollbars="vertical"
+        android:scrollbarSize="50dip">
+
+    </TextView>
+
+    <Button
+        android:id="@+id/popUp_btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popUp_description">
+
+    </Button>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

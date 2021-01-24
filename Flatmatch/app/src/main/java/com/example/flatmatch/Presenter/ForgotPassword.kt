@@ -8,6 +8,9 @@ import com.example.flatmatch.MainActivity
 import com.example.flatmatch.R
 import kotlinx.android.synthetic.main.activity_forgot_password.*
 
+/**
+ * Hier wär das passwort vergessen implementiert
+ */
 class ForgotPassword : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

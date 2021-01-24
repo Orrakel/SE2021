@@ -13,15 +13,17 @@ import com.example.flatmatch.Presenter.ForgotPassword
 import com.example.flatmatch.Presenter.MainPage
 import kotlinx.android.synthetic.main.activity_main.*
 
+/**
+ * das ist das Logging, es wird nach der Email und dem passwort gefragt
+ */
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         login_btn.setOnClickListener {
 
-            var status = if(UserModel.isLoginCorrect("anolting@e-mail.de","1234")) "Login Erfolgreich" else "Login fehlgeschlagen"
+            var status = if(UserModel.isLoginCorrect(username_et.text.toString(),password_et.text.toString())) "Login Erfolgreich" else "Login fehlgeschlagen"
             Toast.makeText(this, status, LENGTH_SHORT).show()
             if(status.equals("Login Erfolgreich"))
             {

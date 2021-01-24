@@ -29,6 +29,8 @@
         <activity android:name="com.example.flatmatch.Presenter.MatchShow" />
         <activity android:name="com.example.flatmatch.Presenter.Profil" />
         <activity android:name="com.example.flatmatch.Presenter.Settings" />
+        <activity android:name=".Presenter.Filter"></activity>
+        <activity android:name=".Presenter.Chat"></activity>
     </application>
 
 </manifest>

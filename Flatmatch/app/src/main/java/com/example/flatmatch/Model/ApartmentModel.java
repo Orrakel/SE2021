@@ -31,7 +31,7 @@ public class ApartmentModel {
         ArrayList<Apartment> apartments = null;
 
         try {
-            selectUser = new URL("http://192.168.43.29/flatmatch/selectAllApartment.php");
+            selectUser = new URL("http://192.168.43.35/flatmatch/selectAllApartment.php");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -75,7 +75,7 @@ public class ApartmentModel {
         ArrayList<Apartment> apartments = null;
 
         try {
-            selectUser = new URL("http://192.168.43.29/flatmatch/selectApartment.php");
+            selectUser = new URL("http://192.168.43.35/flatmatch/selectApartment.php");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -155,7 +155,7 @@ public class ApartmentModel {
                 "'" + newApartment.getDescription() + "')";
 
         try {
-            insertApartment = new URL("http://192.168.43.29/flatmatch/insert.php?sql=" + sql);
+            insertApartment = new URL("http://192.168.43.35/flatmatch/insert.php?sql=" + sql);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -172,7 +172,51 @@ public class ApartmentModel {
         ArrayList<Apartment> apartments = null;
 
         try {
-            selectUser = new URL("http://192.168.43.29/flatmatch/selectLessorApartment.php?email=" + Data.getLoggedInLessor().getEmail());
+            selectUser = new URL("http://192.168.43.35/flatmatch/selectLessorApartment.php?email=" + Data.getLoggedInLessor().getEmail());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            br = new BufferedReader(new InputStreamReader(selectUser.openStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            input = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Login: " + input);
+
+        if(input.equals("{}"))
+            return null;
+
+        try {
+            apartments = buildApartmentList(input);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return apartments;
+    }
+
+    public static ArrayList<Apartment> getAllMatches()
+    {
+        String input = "";
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        URL selectUser = null;
+        BufferedReader br = null;
+        ArrayList<Apartment> apartments = null;
+
+        try {
+            selectUser = new URL("http://192.168.43.35/flatmatch/selectMatches.php");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

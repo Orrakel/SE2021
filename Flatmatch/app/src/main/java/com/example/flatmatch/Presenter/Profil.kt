@@ -31,7 +31,8 @@ class Profil: AppCompatActivity(){
             {
                 R.id.mProfil -> startActivity(Intent(this, Profil::class.java))
                 R.id.mMatches -> startActivity(Intent(this, MatchList::class.java))
-                R.id.mFilter -> startActivity(Intent(this, Settings::class.java))
+                R.id.mFilter -> startActivity(Intent(this, Filter::class.java))
+                R.id.mSettings -> startActivity(Intent(this, Settings::class.java))
             }
             true
         }
@@ -42,7 +43,10 @@ class Profil: AppCompatActivity(){
         }
 
     }
-
+    /**
+     * ermittelt ob ein Menüpunkt angeklickt wurde
+     * @return super.onOptionsItemSelected(), true falls ja, sonst false
+     */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         if(toggle.onOptionsItemSelected(item))

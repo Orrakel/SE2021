@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.flatmatch.R
 import kotlinx.android.synthetic.main.activitiy_main_page.*
 
+/**
+ * Hier wäre die Einstellung Implemntiert
+ */
 class Settings: AppCompatActivity(){
     lateinit var toggle: ActionBarDrawerToggle
 
@@ -29,13 +32,17 @@ class Settings: AppCompatActivity(){
             {
                 R.id.mProfil -> startActivity(Intent(this, Profil::class.java))
                 R.id.mMatches -> startActivity(Intent(this, MatchList::class.java))
-                R.id.mFilter -> startActivity(Intent(this, Settings::class.java))
+                R.id.mFilter -> startActivity(Intent(this, Filter::class.java))
+                R.id.mSettings -> startActivity(Intent(this, Settings::class.java))
             }
             true
         }
 
     }
-
+    /**
+     * ermittelt ob ein Menüpunkt angeklickt wurde
+     * @return super.onOptionsItemSelected(), true falls ja, sonst false
+     */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         if(toggle.onOptionsItemSelected(item))

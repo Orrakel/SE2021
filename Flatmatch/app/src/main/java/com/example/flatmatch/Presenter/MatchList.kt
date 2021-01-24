@@ -15,6 +15,9 @@ import kotlinx.android.synthetic.main.activitiy_main_page.drawerLayout
 import kotlinx.android.synthetic.main.activitiy_main_page.navView
 import kotlinx.android.synthetic.main.activitiy_match_list.*
 
+/**
+ * Soll alle matchesw anzeigen. aufgrund fehlender Daten werden alle Objekte angezeigt
+ */
 class MatchList : AppCompatActivity(), FlatAdapter.OnItemClickListener{
 
     lateinit var toggle: ActionBarDrawerToggle
@@ -38,14 +41,14 @@ class MatchList : AppCompatActivity(), FlatAdapter.OnItemClickListener{
             {
                 R.id.mProfil -> startActivity(Intent(this, Profil::class.java))
                 R.id.mMatches -> startActivity(Intent(this, MatchList::class.java))
-                R.id.mFilter -> startActivity(Intent(this, Settings::class.java))
+                R.id.mFilter -> startActivity(Intent(this, Filter::class.java))
+                R.id.mSettings -> startActivity(Intent(this, Settings::class.java))
             }
             true
         }
         //var test =  ApartmentModel.getAllApartments()
         //val city = test[0].city.toString()
         //var test2: ArrayList<Apartment> = ApartmentModel.getAllApartments()
-        val apa: ArrayList<Apartment> = ApartmentModel.getAllApartments()
         matchList = ApartmentModel.getAllApartments().toMutableList()
 
 
@@ -54,7 +57,10 @@ class MatchList : AppCompatActivity(), FlatAdapter.OnItemClickListener{
         rvMatches.layoutManager = LinearLayoutManager(this)
 
     }
-
+    /**
+     * ermittelt ob ein Menüpunkt angeklickt wurde
+     * @return super.onOptionsItemSelected(), true falls ja, sonst false
+     */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         if(toggle.onOptionsItemSelected(item))
@@ -64,6 +70,10 @@ class MatchList : AppCompatActivity(), FlatAdapter.OnItemClickListener{
         return super.onOptionsItemSelected(item)
     }
 
+    /**
+     * Beim klicken auf das item wird ein neuer Page geöffnet und übergibt die Position vom Objekt
+     * @param position, position in der Liste vom Objekt
+     */
     override fun onItemClick(position: Int) {
         Toast.makeText(this, "Item $position clicked", Toast.LENGTH_SHORT).show()
         val clickedItem = matchList[position]

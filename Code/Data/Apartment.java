@@ -51,4 +51,6 @@ public class Apartment {
     public String getFurnishingYesNo() { return this.furnishingPresent?"yes":"no"; }
 
     public String getDescription() { return this.description; }
+
+    public String getLessorMail() { return this.lessorEmail; }
 }

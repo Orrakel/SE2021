@@ -7,7 +7,10 @@ if ($db->connect_errno) {
 }
 
 $sql = "select * from apartment ";
-$sql .= "where email = " . $_GET["email"];
+$sql .= "where city in(select city from likes where email = '" . $_GET['email'] . "') ";
+$sql .= "and zip in(select zip from likes where email = '" . $_GET['email'] . "') ";
+$sql .= "and street in(select street from likes where email = '" . $_GET['email'] . "') ";
+$sql .= "and housenumber in(select housenumber from likes where email = '" . $_GET['email'] . "') ";
 
 $output = "";
 
@@ -24,8 +27,8 @@ foreach ($db->query($sql) as $row) {
    $output .= '"petallowed":' . $row['petallowed'] . ",";  
    $output .= '"room":' . $row['room'] . ",";  
    $output .= '"costs":' . $row['costs'] . ",";  
-   $output .= '"commercialusage":' . $row['commercialusage'];  
-   $output .= '"furnishing":' . $row['furnishing'];  
+   $output .= '"commercialusage":' . $row['commercialusage'] . ",";  
+   $output .= '"furnishing":' . $row['furnishing'] . ",";  
    $output .= '"description":' . $row['description'];  
    $output .= "},";
 }

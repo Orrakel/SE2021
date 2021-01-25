@@ -12,6 +12,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import butterknife.ButterKnife
 import com.example.flatmatch.Data.Apartment
+import com.example.flatmatch.Data.Data
+import com.example.flatmatch.Data.Lessor
 import com.example.flatmatch.Model.ApartmentModel
 import com.example.flatmatch.R
 import com.lorentzos.flingswipe.SwipeFlingAdapterView
@@ -81,16 +83,20 @@ class MainPage : AppCompatActivity(){
         val flingContainer: SwipeFlingAdapterView = findViewById(R.id.frame)
         flingContainer.setAdapter(arrayAdapter)
         flingContainer.setFlingListener(object : onFlingListener {
+            lateinit var  apartmentBefore: Apartment
             override fun removeFirstObjectInAdapter() {
                 // this is the simplest way to delete an object from the Adapter (/AdapterView)
                 Log.d("LIST", "removed object!")
+                apartmentBefore = apartments[0]
                 apartments.removeAt(0)
                 arrayAdapter.notifyDataSetChanged()
             }
 
             override fun onLeftCardExit(dataObject: Any) {
-
-                Toast.makeText(this@MainPage, "Like! $dataObject", Toast.LENGTH_SHORT).show()
+                flingContainer.selectedItemPosition
+                Toast.makeText(this@MainPage, "Like! ", Toast.LENGTH_SHORT).show()
+                Data.setLessor(Lessor(apartmentBefore.lessorMail,null))
+                ApartmentModel.insertLike(apartmentBefore)
             }
 
             override fun onRightCardExit(dataObject: Any) {
@@ -100,6 +106,7 @@ class MainPage : AppCompatActivity(){
             override fun onAdapterAboutToEmpty(itemsInAdapter: Int) {
                 // Ask for more data her
                 arrayAdapter.notifyDataSetChanged()
+
                 Log.d("LIST", "notified")
 
             }

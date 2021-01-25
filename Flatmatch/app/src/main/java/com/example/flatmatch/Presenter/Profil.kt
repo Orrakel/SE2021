@@ -7,6 +7,7 @@ import android.widget.EditText
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.flatmatch.Data.Data
+import com.example.flatmatch.Data.User
 import com.example.flatmatch.Model.UserModel
 import com.example.flatmatch.R
 import kotlinx.android.synthetic.main.activitiy_profil.*
@@ -40,16 +41,36 @@ class Profil: AppCompatActivity(){
             true
         }
 
-        safe_profil_btn.setOnClickListener {
-            val intent = Intent(this, MainPage::class.java)
-            startActivity(intent)
-        }
+
 
         var user = Data.getLoggedInUser()
-        //name_et.setText(user.firstname)
-        //lastname_et.setText(user.lastname)
-        //people_et.setText(user.persons)
+        age_et.setText(user.age.toString())
+        name_et.setText(user.firstname.toString())
+        lastname_et.setText(user.lastname.toString())
+        people_et.setText(user.persons.toString())
+        salary_et.setText((user.income.toString()))
+        job_et.setText(user.job.toString())
 
+        schufa_et.setText(user.schufaYesNo.toString())
+
+        safe_profil_btn.setOnClickListener {
+
+            var schufa = false
+            if(schufa_et.text.toString().equals("Yes"))
+            {
+                schufa = true
+            }
+
+
+            val user2:User = User(user.email.toString(), name_et.text.toString(),lastname_et.text.toString(),age_et.text.toString().toInt(), "", salary_et.text.toString().toDouble(), job_et.text.toString(),
+            schufa, pet_cb.isChecked,  people_et.text.toString().toInt())
+            Data.setUser(user2)
+            //test.updateUser(user2)
+
+            UserModel.updateUser(user2)
+            println(user2)
+            startActivity(Intent(this, MainPage::class.java ))
+        }
     }
     /**
      * ermittelt ob ein Menüpunkt angeklickt wurde

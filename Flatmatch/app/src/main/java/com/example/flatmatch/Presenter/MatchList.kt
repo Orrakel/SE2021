@@ -14,6 +14,7 @@ import com.example.flatmatch.R
 import kotlinx.android.synthetic.main.activitiy_main_page.drawerLayout
 import kotlinx.android.synthetic.main.activitiy_main_page.navView
 import kotlinx.android.synthetic.main.activitiy_match_list.*
+import kotlinx.android.synthetic.main.activitiy_match_show.*
 
 /**
  * Soll alle matchesw anzeigen. aufgrund fehlender Daten werden alle Objekte angezeigt
@@ -46,15 +47,15 @@ class MatchList : AppCompatActivity(), FlatAdapter.OnItemClickListener{
             }
             true
         }
-        //var test =  ApartmentModel.getAllApartments()
-        //val city = test[0].city.toString()
-        //var test2: ArrayList<Apartment> = ApartmentModel.getAllApartments()
-        matchList = ApartmentModel.getAllApartments().toMutableList()
 
+        matchList = ApartmentModel.getMatches().toMutableList()
 
+        println(matchList)
         val adapter = FlatAdapter(matchList, this)
         rvMatches.adapter = adapter
         rvMatches.layoutManager = LinearLayoutManager(this)
+
+
 
     }
     /**

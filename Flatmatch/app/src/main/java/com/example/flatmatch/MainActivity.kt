@@ -25,7 +25,8 @@ class MainActivity : AppCompatActivity() {
 
         login_btn.setOnClickListener {
 
-            var status = if(UserModel.isLoginCorrect(username_et.text.toString(),password_et.text.toString())) "Login Erfolgreich" else "Login fehlgeschlagen"
+            //var status = if(UserModel.isLoginCorrect(username_et.text.toString(),password_et.text.toString())) "Login Erfolgreich" else "Login fehlgeschlagen"
+            var status = if(UserModel.isLoginCorrect("anolting@e-mail.de","1234")) "Login Erfolgreich" else "Login fehlgeschlagen"
             Toast.makeText(this, status, LENGTH_SHORT).show()
             if(status.equals("Login Erfolgreich"))
             {

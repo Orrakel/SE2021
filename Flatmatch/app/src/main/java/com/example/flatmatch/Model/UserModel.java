@@ -85,7 +85,7 @@ public class UserModel {
                 userInput.getInt("age"),
                 userInput.getString("picture"),
                 userInput.getDouble("income"),
-                userInput.getString("firstname"),
+                userInput.getString("job"),
                 userInput.getString("schufa").equals("yes"),
                 userInput.getString("pet").equals("yes"),
                 userInput.getInt("persons"));
@@ -121,7 +121,7 @@ public class UserModel {
         }
     }
 
-    public void updateUser(User newUser) {
+    public static  void updateUser(User newUser) {
         String input = "";
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -139,7 +139,9 @@ public class UserModel {
                 "schufa = '" + newUser.getSchufaYesNo() + "', " +
                 "pet = '" + newUser.getPetYesNo() + "', " +
                 "persons = '" + newUser.getPersons() + "'" +
-                "WHERE email = " + newUser.getEmail();
+                "WHERE email = '" + newUser.getEmail() + "'";
+
+        System.out.println(sql);
 
         try {
             selectUser = new URL("http://" + Data.getIPAdress() + "/flatmatch/insert.php?sql=" + sql);

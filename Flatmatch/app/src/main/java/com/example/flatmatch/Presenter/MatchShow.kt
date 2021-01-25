@@ -64,6 +64,10 @@ class MatchShow : AppCompatActivity(){
 
             startActivity(Intent(this, Chat::class.java))
         }
+
+        matchShow_delete_btn.setOnClickListener {
+            startActivity((Intent(this, MatchList::class.java)))
+        }
     }
     /**
      * ermittelt ob ein Menüpunkt angeklickt wurde

@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * das ist das Logging, es wird nach der Email und dem passwort gefragt
+ * Man kann auch zu der Account erstellen Seite gehen und Passwort vergessen
  */
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

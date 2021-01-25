@@ -53,4 +53,13 @@ public class Apartment {
     public String getDescription() { return this.description; }
 
     public String getLessorMail() { return this.lessorEmail; }
+    public float getCosts() { return this.costs; }
+    @Override
+    public String toString(){
+
+        return "Stadt: " + getCity() + "\n"
+                + "Zimmer: " + getRoom() + "\n"
+                + "Kosten: " + getCosts() + "\n"
+                + "Größe: " + getSize();
+    }
 }

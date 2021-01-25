@@ -37,7 +37,7 @@ public class UserModel {
         BufferedReader br = null;
 
         try {
-            selectUser = new URL("http://192.168.43.35/flatmatch/selectUser.php?email=" + loginName + "&password=" + password);
+            selectUser = new URL("http://" + Data.getIPAdress() + "/flatmatch/selectUser.php?email=" + loginName + "&password=" + password);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -100,7 +100,6 @@ public class UserModel {
         StrictMode.setThreadPolicy(policy);
 
         URL selectUser = null;
-        BufferedReader br = null;
 
         String sql = "INSERT INTO Users (email, password, Firstname, Lastname, age, picture, income, job, schufa, pet, persons) VALUES " +
                 "('" + newUser.getEmail() + "', " +
@@ -116,7 +115,34 @@ public class UserModel {
                 "'" + newUser.getPersons() + "')";
 
         try {
-            selectUser = new URL("http://192.168.43.35/flatmatch/insert.php?sql=" + sql);
+            selectUser = new URL("http://" + Data.getIPAdress() + "/flatmatch/insert.php?sql=" + sql);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateUser(User newUser) {
+        String input = "";
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        URL selectUser = null;
+
+        String sql = "UPDATE Users SET " +
+                "firstname = '" + newUser.getFirstname() + "', " +
+                "lastname = '" + newUser.getLastname() + "', " +
+                "age = '" + newUser.getAge() + "', " +
+                "picture = '" + newUser.getPicture() + "', " +
+                "income = '" + newUser.getIncome() + "', " +
+                "job = '" + newUser.getJob() + "', " +
+                "schufa = '" + newUser.getSchufaYesNo() + "', " +
+                "pet = '" + newUser.getPetYesNo() + "', " +
+                "persons = '" + newUser.getPersons() + "'" +
+                "WHERE email = " + newUser.getEmail();
+
+        try {
+            selectUser = new URL("http://" + Data.getIPAdress() + "/flatmatch/insert.php?sql=" + sql);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

@@ -31,7 +31,7 @@ public class ApartmentModel {
         ArrayList<Apartment> apartments = null;
 
         try {
-            selectUser = new URL("http://192.168.43.35/flatmatch/selectAllApartment.php");
+            selectUser = new URL("http://" + Data.getIPAdress() + "/flatmatch/selectAllApartment.php");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -75,7 +75,136 @@ public class ApartmentModel {
         ArrayList<Apartment> apartments = null;
 
         try {
-            selectUser = new URL("http://192.168.43.35/flatmatch/selectApartment.php");
+            selectUser = new URL("http://" + Data.getIPAdress() + "/flatmatch/selectApartment.php");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            br = new BufferedReader(new InputStreamReader(selectUser.openStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            input = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Login: " + input);
+
+        if(input.equals("{}"))
+            return null;
+
+        try {
+            apartments = buildApartmentList(input);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return apartments;
+    }
+
+    public static ArrayList<Apartment> getLessorApartments() {
+        String input = "";
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        URL selectUser = null;
+        BufferedReader br = null;
+        ArrayList<Apartment> apartments = null;
+
+        try {
+            selectUser = new URL("http://" + Data.getIPAdress() + "/flatmatch/selectLessorApartment.php?email=" + Data.getLoggedInLessor().getEmail());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            br = new BufferedReader(new InputStreamReader(selectUser.openStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            input = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Login: " + input);
+
+        if(input.equals("{}"))
+            return null;
+
+        try {
+            apartments = buildApartmentList(input);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return apartments;
+    }
+
+    public static ArrayList<Apartment> getLikes() {
+        String input = "";
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        URL selectUser = null;
+        BufferedReader br = null;
+        ArrayList<Apartment> apartments = null;
+
+        try {
+            selectUser = new URL("http://" + Data.getIPAdress() + "/flatmatch/selectLikes.php?email=" + Data.getLoggedInLessor().getEmail());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            br = new BufferedReader(new InputStreamReader(selectUser.openStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            input = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Login: " + input);
+
+        if(input.equals("{}"))
+            return null;
+
+        try {
+            apartments = buildApartmentList(input);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return apartments;
+    }
+
+    public static ArrayList<Apartment> getMatches() {
+        String input = "";
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        URL selectUser = null;
+        BufferedReader br = null;
+        ArrayList<Apartment> apartments = null;
+
+        try {
+            selectUser = new URL("http://" + Data.getIPAdress() + "/flatmatch/selectLikes.php?email=" + Data.getLoggedInLessor().getEmail());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -138,7 +267,6 @@ public class ApartmentModel {
         StrictMode.setThreadPolicy(policy);
 
         URL insertApartment = null;
-        BufferedReader br = null;
 
         String sql = "INSERT INTO apartment (city, zip, street, housenumber, email, size, petallowed, room, costs, commercialusage, furnishing, description)  VALUES " +
                 "('" + newApartment.getCity() + "', " +
@@ -149,102 +277,62 @@ public class ApartmentModel {
                 "'" + newApartment.getSize() + "', " +
                 "'" + newApartment.getPetallowedYesNo() + "', " +
                 "'" + newApartment.getRoom() + "', " +
-                "'" + newApartment.getCosts() + "', " +
                 "'" + newApartment.getCommercialusageYesNo() + "', " +
                 "'" + newApartment.getFurnishingYesNo() + "', " +
                 "'" + newApartment.getDescription() + "')";
 
         try {
-            insertApartment = new URL("http://192.168.43.35/flatmatch/insert.php?sql=" + sql);
+            insertApartment = new URL("http://" + Data.getIPAdress() + "/flatmatch/insert.php?sql=" + sql);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
     }
 
-    public static ArrayList<Apartment> getLessorApartments() {
+    public static void insertLike(Apartment newLikedApartment) {
         String input = "";
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        URL selectUser = null;
-        BufferedReader br = null;
-        ArrayList<Apartment> apartments = null;
+        URL insertApartment = null;
+
+        String sql = "INSERT INTO likes (city, zip, street, housenumber, email, email_0)  VALUES " +
+                "('" + newLikedApartment.getCity() + "', " +
+                "'" + newLikedApartment.getZip() + "', " +
+                "'" + newLikedApartment.getStreet() + "', " +
+                "'" + newLikedApartment.getHousenumber() + "', " +
+                "'" + Data.getLoggedInLessor().getEmail() + "', " +
+                "'" + newLikedApartment.getLessorMail() + ")";
 
         try {
-            selectUser = new URL("http://192.168.43.35/flatmatch/selectLessorApartment.php?email=" + Data.getLoggedInLessor().getEmail());
+            insertApartment = new URL("http://" + Data.getIPAdress() + "/flatmatch/insert.php?sql=" + sql);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-
-        try {
-            br = new BufferedReader(new InputStreamReader(selectUser.openStream()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            input = br.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println("Login: " + input);
-
-        if(input.equals("{}"))
-            return null;
-
-        try {
-            apartments = buildApartmentList(input);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-        return apartments;
     }
 
-    public static ArrayList<Apartment> getAllMatches()
-    {
+    public static void insertMatch(Apartment newApartmentMatch) {
         String input = "";
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        URL selectUser = null;
-        BufferedReader br = null;
-        ArrayList<Apartment> apartments = null;
+        URL insertApartment = null;
+
+        String sql = "INSERT INTO apartment (city, zip, street, housenumber, Usersemail, lessoremail)  VALUES " +
+                "('" + newApartmentMatch.getCity() + "', " +
+                "'" + newApartmentMatch.getZip() + "', " +
+                "'" + newApartmentMatch.getStreet() + "', " +
+                "'" + newApartmentMatch.getHousenumber() + "', " +
+                "'" + Data.getLoggedInLessor().getEmail() + "', " +
+                "'" + newApartmentMatch.getLessorMail() + "')";
 
         try {
-            selectUser = new URL("http://192.168.43.35/flatmatch/selectMatches.php");
+            insertApartment = new URL("http://" + Data.getIPAdress() + "/flatmatch/insert.php?sql=" + sql);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-
-        try {
-            br = new BufferedReader(new InputStreamReader(selectUser.openStream()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            input = br.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println("Login: " + input);
-
-        if(input.equals("{}"))
-            return null;
-
-        try {
-            apartments = buildApartmentList(input);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-        return apartments;
     }
+
+
 }

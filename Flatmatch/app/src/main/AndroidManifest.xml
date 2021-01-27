@@ -30,8 +30,9 @@
         <activity android:name="com.example.flatmatch.Presenter.MatchShow" />
         <activity android:name="com.example.flatmatch.Presenter.Profil" />
         <activity android:name="com.example.flatmatch.Presenter.Settings" />
-        <activity android:name=".Presenter.Filter"></activity>
-        <activity android:name=".Presenter.Chat"></activity>
+        <activity android:name=".Presenter.Filter" />
+        <activity android:name=".Presenter.Chat" />
+        <activity android:name=".Presenter.ApartmentList"></activity>
     </application>
 
 </manifest>

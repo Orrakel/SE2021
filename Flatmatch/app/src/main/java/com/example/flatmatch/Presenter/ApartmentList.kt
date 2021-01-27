@@ -15,19 +15,17 @@ import kotlinx.android.synthetic.main.activitiy_main_page.drawerLayout
 import kotlinx.android.synthetic.main.activitiy_main_page.navView
 import kotlinx.android.synthetic.main.activitiy_match_list.*
 
-/**
- * Soll alle matchesw anzeigen. aufgrund fehlender Daten werden alle Objekte angezeigt
- */
-class MatchList : AppCompatActivity(), FlatAdapter.OnItemClickListener{
+class ApartmentList : AppCompatActivity(), FlatAdapter.OnItemClickListener{
 
     lateinit var toggle: ActionBarDrawerToggle
-    private lateinit var matchList: MutableList<Apartment>
+    private lateinit var objectList: MutableList<Apartment>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activitiy_match_list)
+        setContentView(R.layout.activity_apartment_list)
 
-        toggle = ActionBarDrawerToggle(this, drawerLayout,
+        toggle = ActionBarDrawerToggle(
+            this, drawerLayout,
             R.string.open,
             R.string.close
         )
@@ -37,26 +35,25 @@ class MatchList : AppCompatActivity(), FlatAdapter.OnItemClickListener{
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         navView.setNavigationItemSelectedListener {
-            when(it.itemId)
-            {
-                R.id.mProfil -> startActivity(Intent(this, Profil::class.java))
+            when (it.itemId) {
+                R.id.mHome -> startActivity(Intent(this, MainPage::class.java))
                 R.id.mMatches -> startActivity(Intent(this, MatchList::class.java))
-                R.id.mFilter -> startActivity(Intent(this, Filter::class.java))
+                R.id.mObjects -> startActivity(Intent(this, Filter::class.java))
                 R.id.mSettings -> startActivity(Intent(this, Settings::class.java))
+
             }
             true
         }
 
-        matchList = ApartmentModel.getMatches().toMutableList()
+        objectList = ApartmentModel.getMatches().toMutableList()
 
-        println(matchList)
-        val adapter = FlatAdapter(matchList, this)
+        println(objectList)
+        val adapter = FlatAdapter(objectList, this)
         rvMatches.adapter = adapter
         rvMatches.layoutManager = LinearLayoutManager(this)
 
-
-
     }
+
     /**
      * ermittelt ob ein Menüpunkt angeklickt wurde
      * @return super.onOptionsItemSelected(), true falls ja, sonst false
@@ -70,17 +67,12 @@ class MatchList : AppCompatActivity(), FlatAdapter.OnItemClickListener{
         return super.onOptionsItemSelected(item)
     }
 
-    /**
-     * Beim klicken auf das item wird ein neuer Page geöffnet und übergibt die Position vom Objekt
-     * @param position, position in der Liste vom Objekt
-     */
     override fun onItemClick(position: Int) {
         Toast.makeText(this, "Item $position clicked", Toast.LENGTH_SHORT).show()
-        val clickedItem = matchList[position]
+        val clickedItem = objectList[position]
         Intent(this, MatchShow::class.java).also{
             it.putExtra("position",position)
             startActivity(it)
         }
-
     }
 }

@@ -38,6 +38,7 @@ class Chat: AppCompatActivity() {
                 R.id.mMatches -> startActivity(Intent(this, MatchList::class.java))
                 R.id.mFilter -> startActivity(Intent(this, Filter::class.java))
                 R.id.mSettings -> startActivity(Intent(this, Settings::class.java))
+                R.id.mHome -> startActivity(Intent(this, MainPage::class.java))
             }
             true
         }

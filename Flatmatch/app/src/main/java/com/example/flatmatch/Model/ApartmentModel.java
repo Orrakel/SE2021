@@ -24,8 +24,7 @@ import java.util.ArrayList;
 
 public class ApartmentModel {
 
-    public static ArrayList<Apartment> getAllApartments()
-    {
+    public static ArrayList<Apartment> getAllApartments() {
         String input = "";
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -55,7 +54,7 @@ public class ApartmentModel {
 
         System.out.println("Login: " + input);
 
-        if(input.equals("{}"))
+        if (input.equals("{}"))
             return null;
 
         try {
@@ -68,8 +67,7 @@ public class ApartmentModel {
         return apartments;
     }
 
-    public static ArrayList<Apartment> getApartments()
-    {
+    public static ArrayList<Apartment> getApartments() {
         String input = "";
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -99,7 +97,7 @@ public class ApartmentModel {
 
         System.out.println("Login: " + input);
 
-        if(input.equals("{}"))
+        if (input.equals("{}"))
             return null;
 
         try {
@@ -112,7 +110,7 @@ public class ApartmentModel {
         return apartments;
     }
 
-    public static ArrayList<Apartment> getLessorApartments() {
+    public static ArrayList<Apartment> getLessorApartments(String email) {
         String input = "";
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -121,9 +119,9 @@ public class ApartmentModel {
         URL selectUser = null;
         BufferedReader br = null;
         ArrayList<Apartment> apartments = null;
-
+        System.out.println(Data.getLoggedInLessor());
         try {
-            selectUser = new URL("http://" + Data.getIPAdress() + "/flatmatch/selectLessorApartment.php?email=" + Data.getLoggedInLessor().getEmail());
+            selectUser = new URL("http://" + Data.getIPAdress() + "/flatmatch/selectLessorApartment.php?email=" + email);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -142,7 +140,7 @@ public class ApartmentModel {
 
         System.out.println("Login: " + input);
 
-        if(input.equals("{}"))
+        if (input.equals("{}"))
             return null;
 
         try {
@@ -185,7 +183,7 @@ public class ApartmentModel {
 
         System.out.println("Login: " + input);
 
-        if(input.equals("{}"))
+        if (input.equals("{}"))
             return null;
 
         try {
@@ -228,7 +226,7 @@ public class ApartmentModel {
 
         System.out.println("Login: " + input);
 
-        if(input.equals("{}"))
+        if (input.equals("{}"))
             return null;
 
         try {
@@ -241,12 +239,14 @@ public class ApartmentModel {
         return apartments;
     }
 
+
+
     private static ArrayList<Apartment> buildApartmentList(String input) throws JSONException {
         ArrayList<Apartment> apartments = new ArrayList<>();
         JSONObject apartmentsInput = new JSONObject(input);
         JSONArray allApartments = apartmentsInput.getJSONArray("apartments");
 
-        for( int i = 0 ; i < allApartments.length()-1 ; i++) {
+        for (int i = 0; i < allApartments.length() - 1; i++) {
             Apartment apartment = new Apartment(allApartments.getJSONObject(i).getString("city"),
                     allApartments.getJSONObject(i).getString("zip"),
                     allApartments.getJSONObject(i).getString("street"),
@@ -314,9 +314,9 @@ public class ApartmentModel {
                 "'" + newLikedApartment.getZip() + "', " +
                 "'" + newLikedApartment.getStreet() + "', " +
                 "'" + newLikedApartment.getHousenumber() + "', " +
-                "'" + Data.getLoggedInLessor().getEmail() + "', " +
-                "'" + newLikedApartment.getLessorMail() + ")";
-
+                "'" + Data.getLoggedInUser().getEmail() + "', " +
+                "'" + newLikedApartment.getLessorMail() + "')";
+        System.out.println(sql);
         sql = sql.replace(" ", "%20");
 
         httpPost = new HttpPost("http://" + Data.getIPAdress() + "/flatmatch/insert.php?sql=" + sql);
@@ -358,5 +358,79 @@ public class ApartmentModel {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static ArrayList<Apartment> getFilteredApartments(String city, double minSize,
+                                                             double maxSize, int minRooms,
+                                                             int maxRooms, boolean petsAllowed,
+                                                             double minCosts, double maxCosts,
+                                                             boolean commercialUsage, boolean furnishing) {
+        String input = "";
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        URL selectUser = null;
+        BufferedReader br = null;
+        ArrayList<Apartment> apartments = null;
+
+        String petsAllowedYesNo = "NA";
+        String commercialUsageYesNo = "NA";
+        String furnishingYesNo = "NA";
+
+        if (city == null || city.equals(""))
+            city = "Minden";
+
+        if (petsAllowed)
+            petsAllowedYesNo = "Yes";
+
+        if (commercialUsage)
+            commercialUsageYesNo = "Yes";
+
+        if (furnishing)
+            furnishingYesNo = "Yes";
+
+
+        try {
+            selectUser = new URL("http://" + Data.getIPAdress() + "/flatmatch/selectFilteredApartment.php?" +
+                    "city=" + city + "&minSize=" + minSize + "&maxSize=" + maxSize +
+                    "&minRooms=" + minRooms + "&maxRooms=" + maxRooms + "&petsAllowed=" + petsAllowedYesNo +
+                    "&minCosts=" + minCosts + "&maxCosts=" + maxCosts + "&commercialUsage=" + commercialUsageYesNo +
+                    "&furnishing=" + furnishingYesNo);
+
+            System.out.println("http://" + Data.getIPAdress() + "/flatmatch/selectFilteredApartment.php?" +
+                    "city=" + city + "&minSize=" + minSize + "&maxSize=" + maxSize +
+                    "&minRooms=" + minRooms + "&maxRooms=" + maxRooms + "&petsAllowed=" + petsAllowedYesNo +
+                    "&minCosts=" + minCosts + "&maxCosts=" + maxCosts + "&commercialUsage=" + commercialUsageYesNo +
+                    "&furnishing=" + furnishingYesNo);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            br = new BufferedReader(new InputStreamReader(selectUser.openStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            input = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Login: " + input);
+
+        if (input.equals("{}"))
+            return null;
+
+        try {
+            apartments = buildApartmentList(input);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return apartments;
     }
 }

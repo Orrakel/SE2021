@@ -83,6 +83,32 @@
 
         </EditText>
 
+        <RadioGroup
+            android:id="@+id/createAccount_rg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/createAccount_user_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mieter"
+                android:checked="true"
+                android:onClick="checkButton">
+
+            </RadioButton>
+
+            <RadioButton
+                android:id="@+id/createAccount_lessor_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vermieter"
+                android:onClick="checkButton">
+
+            </RadioButton>
+        </RadioGroup>
+
     <Button
         android:id="@+id/create_account_btn"
         android:layout_width="wrap_content"

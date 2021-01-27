@@ -7,20 +7,14 @@
 
     </item>
     <item
-        android:id="@+id/mProfil"
-        android:title="Profil">
+        android:id="@+id/mObjects"
+        android:title="Objekte">
 
     </item>
 
     <item
         android:id="@+id/mMatches"
         android:title="Matches">
-
-    </item>
-
-    <item
-        android:id="@+id/mFilter"
-        android:title="Filter">
 
     </item>
 

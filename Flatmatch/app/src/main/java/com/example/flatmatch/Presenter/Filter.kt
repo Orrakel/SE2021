@@ -41,6 +41,7 @@ class Filter  : AppCompatActivity() {
                 R.id.mMatches -> startActivity(Intent(this, MatchList::class.java))
                 R.id.mFilter -> startActivity(Intent(this, Filter::class.java))
                 R.id.mSettings -> startActivity(Intent(this, Settings::class.java))
+                R.id.mHome -> startActivity(Intent(this, MainPage::class.java))
             }
             true
             }
@@ -69,42 +70,43 @@ class Filter  : AppCompatActivity() {
             val filterSizeMin: Float = try {
                 filter_sizemin_et.text.toString().toFloat()
             } catch (e: NumberFormatException) {
-                -1-0f
+                0.0f
             }
 
 
             val filterSizeMax: Float = try {
                 filter_sizemax_et.text.toString().toFloat()
             } catch (e: NumberFormatException) {
-                -1.0f
+                0.0f
             }
             val filterRoomsMin: Int = try{
                 filter_roomsmin_et.text.toString().toInt()
             } catch (e: NumberFormatException) {
-                -1
+                0
             }
             val filterRoomsMax: Int = try{
                 filter_roomsmax_et.text.toString().toInt()
             } catch (e: NumberFormatException) {
-                -1
+                0
             }
             val filterPets: Boolean = filter_petyes.isChecked
             val filterCostsMin: Float = try{
                 filter_costsmin_et.text.toString().toFloat()
             } catch (e: NumberFormatException) {
-                -1.0f
+                0.0f
             }
             val filterCostsMax: Float = try{
                 filter_costsmax_et.text.toString().toFloat()
             } catch (e: NumberFormatException) {
-                -1.0f
+                0.0f
             }
             val filterCommercial: Boolean = filter_commercialUsageYes.isChecked
             val filterFurnishing: Boolean = filter_furnishingYes.isChecked
 
             Data.setFilter(com.example.flatmatch.Data.Filter(filterCity,filterSizeMin , filterSizeMax,filterRoomsMin ,
                     filterRoomsMax ,filterPets , filterCostsMin,filterCostsMax ,filterCommercial ,filterFurnishing))
-
+            println("FILTER.KT" + filterFurnishing)
+            startActivity(Intent(this, MainPage::class.java))
         }
     }
     /**

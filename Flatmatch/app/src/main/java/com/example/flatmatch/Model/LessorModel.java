@@ -7,6 +7,11 @@ import com.example.flatmatch.Data.Data;
 import com.example.flatmatch.Data.Lessor;
 import com.example.flatmatch.Data.User;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -82,28 +87,37 @@ public class LessorModel {
         JSONObject lessorInput = new JSONObject(input);
         ArrayList<Apartment> apartments = new ArrayList<>();
 
-        apartments = ApartmentModel.getLessorApartments();
+        apartments = ApartmentModel.getLessorApartments(lessorInput.getString("email"));
 
         Lessor lessor = new Lessor(lessorInput.getString("email"),apartments);
-
+        System.out.println("BuildLessor " + lessor);
         Data.setLessor(lessor);
     }
 
-    public void insertNewUser(Lessor newLessor, String password) {
+    public static void insertNewUser(Lessor newLessor, String password) {
         String input = "";
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        HttpClient httpClient = new DefaultHttpClient();
+        HttpPost httpPost = new HttpPost();
         URL selectUser = null;
         BufferedReader br = null;
 
         String sql = "INSERT INTO Lessor (email, password) VALUES " +
                 "('" + newLessor.getEmail() + "', '"+ password + "')";
+        System.out.println(sql);
+
+        sql = sql.replace(" ", "%20");
+
+        httpPost = new HttpPost("http://" + Data.getIPAdress() + "/flatmatch/insert.php?sql=" + sql);
 
         try {
-            selectUser = new URL("http://" + Data.getIPAdress() + "/flatmatch/insert.php?sql=" + sql);
-        } catch (MalformedURLException e) {
+            HttpResponse response = httpClient.execute(httpPost);
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

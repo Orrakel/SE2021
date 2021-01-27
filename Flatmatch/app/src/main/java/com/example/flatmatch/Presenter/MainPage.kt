@@ -38,37 +38,91 @@ class MainPage : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activitiy_main_page)
-        ButterKnife.inject(this)
-
-
-            loadData()
-
-
-        println(Data.getFilter())
-        toggle = ActionBarDrawerToggle(this, drawerLayout,
+        if(Data.getLoggedInUser() != null) {
+            setContentView(R.layout.activitiy_main_page)
+            toggle = ActionBarDrawerToggle(this, drawerLayout,
                 R.string.open,
                 R.string.close
-        )
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
+            )
+            drawerLayout.addDrawerListener(toggle)
+            toggle.syncState()
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        navView.setNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.mProfil -> startActivity(Intent(this, Profil::class.java))
-                R.id.mMatches -> startActivity(Intent(this, MatchList::class.java))
-                R.id.mFilter -> startActivity(Intent(this, Filter::class.java))
-                R.id.mSettings -> startActivity(Intent(this, Settings::class.java))
+            navView.setNavigationItemSelectedListener {
+                when (it.itemId) {
+                    R.id.mProfil -> startActivity(Intent(this, Profil::class.java))
+                    R.id.mMatches -> startActivity(Intent(this, MatchList::class.java))
+                    R.id.mFilter -> startActivity(Intent(this, Filter::class.java))
+                    R.id.mSettings -> startActivity(Intent(this, Settings::class.java))
+                    R.id.mHome -> startActivity(Intent(this, MainPage::class.java))
+                }
+                true
             }
-            true
         }
+        else
+        {
+            setContentView(R.layout.activitiy_main_page_lessor)
+            toggle = ActionBarDrawerToggle(this, drawerLayout,
+                R.string.open,
+                R.string.close
+            )
+            drawerLayout.addDrawerListener(toggle)
+            toggle.syncState()
+
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+            navView.setNavigationItemSelectedListener {
+                when (it.itemId) {
+                    R.id.mObjects -> startActivity(Intent(this, ApartmentList::class.java))
+                    R.id.mMatches -> startActivity(Intent(this, MatchList::class.java))
+                    R.id.mSettings -> startActivity(Intent(this, Settings::class.java))
+                    R.id.mHome -> startActivity(Intent(this, MainPage::class.java))
+                }
+                true
+            }
+        }
+        ButterKnife.inject(this)
         apartments = java.util.ArrayList<Apartment>()
 
+        if(Data.getLoggedInUser() != null) {
+            loadData()
+            if (Data.getFilter() != null) {
+                println(
+                    "MAINPAGE " + Data.getFilter().furnishingYesNo + " " + Data.getFilter().city + " " +
+                            Data.getFilter().sizeMin.toDouble() + " " +
+                            Data.getFilter().sizeMax.toDouble() + " " +
+                            Data.getFilter().roomMin + " " +
+                            Data.getFilter().roomMax + " " +
+                            Data.getFilter().petallowedYesNo + " " +
+                            Data.getFilter().costsMin.toDouble() + " " +
+                            Data.getFilter().costsMax.toDouble() + " " +
+                            Data.getFilter().commercialusageYesNo + " " +
+                            Data.getFilter().furnishingYesNo
+                )
+                apartments = ApartmentModel.getFilteredApartments(
+                    Data.getFilter().city,
+                    Data.getFilter().sizeMin.toDouble(),
+                    Data.getFilter().sizeMax.toDouble(),
+                    Data.getFilter().roomMin,
+                    Data.getFilter().roomMax,
+                    Data.getFilter().petallowedYesNo,
+                    Data.getFilter().costsMin.toDouble(),
+                    Data.getFilter().costsMax.toDouble(),
+                    Data.getFilter().commercialusageYesNo,
+                    Data.getFilter().furnishingYesNo
+                )
+            } else {
+                apartments = ApartmentModel.getAllApartments()
+            }
+        }
+        else
+        {
+            println("MainPage: " )
+            apartments = ApartmentModel.getAllApartments()
+        }
 
-        apartments = ApartmentModel.getAllApartments()
-        arrayAdapter = ArrayAdapter(this, R.layout.item, R.id.helloText, apartments)
+            arrayAdapter = ArrayAdapter(this, R.layout.item, R.id.helloText, apartments)
 
         val flingContainer: SwipeFlingAdapterView = findViewById(R.id.frame)
         flingContainer.setAdapter(arrayAdapter)

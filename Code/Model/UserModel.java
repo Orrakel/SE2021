@@ -136,8 +136,6 @@ public class UserModel {
     }
 
     public static void updateUser(User newUser) {
-        String input = "";
-
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
@@ -159,6 +157,24 @@ public class UserModel {
         sql = sql.replace(" ", "%20");
 
         httpPost = new HttpPost("http://" + Data.getIPAdress() + "/flatmatch/insert.php?sql=" + sql);
+
+        try {
+            HttpResponse response = httpClient.execute(httpPost);
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteUser() {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        HttpClient httpClient = new DefaultHttpClient();
+        HttpPost httpPost = new HttpPost();
+
+        httpPost = new HttpPost("http://" + Data.getIPAdress() + "/flatmatch/deleteUser.php?email=" + Data.getLoggedInUser().getEmail());
 
         try {
             HttpResponse response = httpClient.execute(httpPost);

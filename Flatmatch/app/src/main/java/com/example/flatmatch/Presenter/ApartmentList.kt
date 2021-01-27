@@ -14,6 +14,7 @@ import com.example.flatmatch.R
 import kotlinx.android.synthetic.main.activitiy_main_page.drawerLayout
 import kotlinx.android.synthetic.main.activitiy_main_page.navView
 import kotlinx.android.synthetic.main.activitiy_match_list.*
+import kotlinx.android.synthetic.main.activity_apartment_list.*
 
 class ApartmentList : AppCompatActivity(), FlatAdapter.OnItemClickListener{
 
@@ -45,12 +46,12 @@ class ApartmentList : AppCompatActivity(), FlatAdapter.OnItemClickListener{
             true
         }
 
-        objectList = ApartmentModel.getMatches().toMutableList()
+        objectList = ApartmentModel.getLessorMatches().toMutableList()
 
         println(objectList)
         val adapter = FlatAdapter(objectList, this)
-        rvMatches.adapter = adapter
-        rvMatches.layoutManager = LinearLayoutManager(this)
+        rvLikes.adapter = adapter
+        rvLikes.layoutManager = LinearLayoutManager(this)
 
     }
 

@@ -8,23 +8,18 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.flatmatch.Model.ApartmentModel
 import com.example.flatmatch.R
 import kotlinx.android.synthetic.main.activitiy_main_page.*
-import kotlinx.android.synthetic.main.activitiy_main_page.drawerLayout
 import kotlinx.android.synthetic.main.activitiy_main_page.navView
-import kotlinx.android.synthetic.main.activitiy_match_show.*
+import kotlinx.android.synthetic.main.activity_user_show.*
 
-/**
- * zeigt Das Objekt an was angeklickt wurde.
- *
- */
-class MatchShow : AppCompatActivity(){
+class UserShow : AppCompatActivity(){
 
     lateinit var toggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activitiy_match_show)
+        setContentView(R.layout.activity_user_show)
 
-        toggle = ActionBarDrawerToggle(this, drawerLayout,
+        toggle = ActionBarDrawerToggle(this, user_drawerLayout,
             R.string.open,
             R.string.close
         )
@@ -44,23 +39,22 @@ class MatchShow : AppCompatActivity(){
             true
         }
 
-        val flat = ApartmentModel.getAllApartments().get(intent.getIntExtra("position", -1))
+        val users = ApartmentModel.getLessorMatches().get(intent.getIntExtra("position", -1))
 
-        cityMatchShow_tv.text = "Stadt: " + flat.city
-        zipMatchShow_tv.text = "PLZ: " + flat.zip
-        streetMatchShow_tv.text = "Straße: " + flat.street
-        houseNumberMatchShow_tv.text =  flat.housenumber
-        sizeMatchShow_tv.text = "Größe: " + flat.size.toString()
-        arePetAllowedatchShow_tv.text = "Haustier: " + flat.petallowedYesNo
-        roomsMatchShow_tv.text = "Räume: " + flat.room.toString()
-        costsMatchShow_tv.text = "Kosten: " + flat.costs.toString()
-        commercialUsageAllowedMatchShow_tv.text = "Commercial Usage: " + flat.commercialusageYesNo
-        furnishingPresentMatchShow_tv.text = "Einbausachen:" + flat.furnishingYesNo
-        decriptionMatchShow_tv.text = "Beschreibung: " + "\n" + flat.description
+        emailUserShow_tv.text = "Stadt: " + users.city
+        ageUserShow_tv.text = "PLZ: " + users.zip
+        firstnameUserShow_tv.text = "Straße: " + users.street
+        lastnameUserShow_tv.text =  users.housenumber
+        incomeUserShow_tv.text = "Größe: " + users.size.toString()
+        jobShow_tv.text = "Haustier: " + users.petallowedYesNo
+        ShufaUserShow_tv.text = "Räume: " + users.room.toString()
+        petUserShow_tv.text = "Kosten: " + users.costs.toString()
+        personsUserShow_tv.text = "Commercial Usage: " + users.commercialusageYesNo
 
 
 
-        matchShow_chat_btn.setOnClickListener {
+
+        userShow_chat_btn.setOnClickListener {
 
             startActivity(Intent(this, Chat::class.java))
         }

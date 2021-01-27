@@ -433,4 +433,47 @@ public class ApartmentModel {
 
         return apartments;
     }
+
+    public static ArrayList<Apartment> getLessorMatches() {
+        String input = "";
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        URL selectUser = null;
+        BufferedReader br = null;
+        ArrayList<Apartment> apartments = null;
+
+        try {
+            selectUser = new URL("http://" + Data.getIPAdress() + "/flatmatch/selectLikes.php?email=" + Data.getLoggedInLessor().getEmail());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            br = new BufferedReader(new InputStreamReader(selectUser.openStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            input = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Login: " + input);
+
+        if(input.equals("{}"))
+            return null;
+
+        try {
+            apartments = buildApartmentList(input);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return apartments;
+    }
 }

@@ -5,10 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flatmatch.Data.Apartment
+import com.example.flatmatch.Data.User
 import com.example.flatmatch.R
 import kotlinx.android.synthetic.main.item_flat.view.*
 
-class UserAdapter (var users: List<Apartment>, val listener: OnItemClickListener) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+class UserAdapter (var users: List<User>, val listener: OnItemClickListener) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
     /**
      * eine innere Klasse die die View speichert von den Einträge
@@ -66,7 +67,7 @@ class UserAdapter (var users: List<Apartment>, val listener: OnItemClickListener
      */
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         holder.itemView.apply {
-            tvTitle.text = users[position].city + ", " + users[position].street
+            tvTitle.text = users[position].firstname + ", " + users[position].lastname
 
         }
     }

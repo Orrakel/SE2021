@@ -24,8 +24,8 @@ foreach ($db->query($sql) as $row) {
    $output .= '"petallowed":' . $row['petallowed'] . ",";  
    $output .= '"room":' . $row['room'] . ",";  
    $output .= '"costs":' . $row['costs'] . ",";  
-   $output .= '"commercialusage":' . $row['commercialusage'];  
-   $output .= '"furnishing":' . $row['furnishing'];  
+   $output .= '"commercialusage":' . $row['commercialusage'] . ",";  
+   $output .= '"furnishing":' . $row['furnishing'] . ",";  
    $output .= '"description":' . $row['description'];  
    $output .= "},";
 }

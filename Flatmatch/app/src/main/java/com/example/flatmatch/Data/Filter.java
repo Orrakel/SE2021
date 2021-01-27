@@ -13,11 +13,8 @@ public class Filter {
     private boolean commercialUsage;
     private boolean furnishingPresent;
 
-    public Filter()
-    {
-    }
 
-    public void setFilter(String city_, float costMin_, float costMax_, float sizeMin_, float sizeMax_, int roomsMin_, int roomsMax_, boolean arePetsAllowed_, boolean commercialUsage_, boolean furnishingPresent_)
+    public Filter(String city_, float sizeMin_, float sizeMax_, int roomsMin_, int roomsMax_, boolean arePetsAllowed_, float costMin_, float costMax_, boolean commercialUsage_, boolean furnishingPresent_)
     {
         city = city_;
         costMin = costMin_;
@@ -37,14 +34,14 @@ public class Filter {
     public float getSizeMin() { return this.sizeMin; }
     public float getSizeMax() { return this.sizeMax; }
 
-    public String getPetallowedYesNo() { return this.arePetsAllowed?"yes":"no"; }
+    public Boolean getPetallowedYesNo() { return this.arePetsAllowed; }
 
     public int getRoomMin() { return this.roomsMin; }
     public int getRoomMax() { return this.roomsMax; }
 
-    public String getCommercialusageYesNo() { return this.commercialUsage?"yes":"no"; }
+    public Boolean getCommercialusageYesNo() { return this.commercialUsage; }
 
-    public String getFurnishingYesNo() { return this.furnishingPresent?"yes":"no"; }
+    public Boolean getFurnishingYesNo() { return this.furnishingPresent; }
 
     public float getCostsMax() { return this.costMax; }
     public float getCostsMin() { return this.costMin; }

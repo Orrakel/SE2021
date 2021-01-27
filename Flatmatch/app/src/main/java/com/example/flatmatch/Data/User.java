@@ -45,5 +45,8 @@ public class User {
 
     public String getPetYesNo() { return this.pet?"yes":"no"; }
 
+    public Boolean getPet(){return  pet;}
+    public Boolean getSchufa(){return schufa;}
+
     public int getPersons() { return this.persons; }
 }

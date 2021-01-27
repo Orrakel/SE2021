@@ -5,6 +5,11 @@ import android.os.StrictMode;
 import com.example.flatmatch.Data.Data;
 import com.example.flatmatch.Data.User;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -93,13 +98,14 @@ public class UserModel {
         Data.setUser(user);
     }
 
-    public void insertNewUser(User newUser, String password) {
+    public static void insertNewUser(User newUser, String password) {
         String input = "";
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        URL selectUser = null;
+        HttpClient httpClient = new DefaultHttpClient();
+        HttpPost httpPost = new HttpPost();
 
         String sql = "INSERT INTO Users (email, password, Firstname, Lastname, age, picture, income, job, schufa, pet, persons) VALUES " +
                 "('" + newUser.getEmail() + "', " +
@@ -114,20 +120,27 @@ public class UserModel {
                 "'" + newUser.getPetYesNo() + "', " +
                 "'" + newUser.getPersons() + "')";
 
+        sql = sql.replace(" ", "%20");
+
+        httpPost = new HttpPost("http://" + Data.getIPAdress() + "/flatmatch/insert.php?sql=" + sql);
+
+        System.out.println(sql);
+
         try {
-            selectUser = new URL("http://" + Data.getIPAdress() + "/flatmatch/insert.php?sql=" + sql);
-        } catch (MalformedURLException e) {
+            HttpResponse response = httpClient.execute(httpPost);
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static  void updateUser(User newUser) {
-        String input = "";
-
+    public static void updateUser(User newUser) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        URL selectUser = null;
+        HttpClient httpClient = new DefaultHttpClient();
+        HttpPost httpPost = new HttpPost();
 
         String sql = "UPDATE Users SET " +
                 "firstname = '" + newUser.getFirstname() + "', " +
@@ -138,14 +151,36 @@ public class UserModel {
                 "job = '" + newUser.getJob() + "', " +
                 "schufa = '" + newUser.getSchufaYesNo() + "', " +
                 "pet = '" + newUser.getPetYesNo() + "', " +
-                "persons = '" + newUser.getPersons() + "'" +
+                "persons = '" + newUser.getPersons() + "' " +
                 "WHERE email = '" + newUser.getEmail() + "'";
 
-        System.out.println(sql);
+        sql = sql.replace(" ", "%20");
+
+        httpPost = new HttpPost("http://" + Data.getIPAdress() + "/flatmatch/insert.php?sql=" + sql);
 
         try {
-            selectUser = new URL("http://" + Data.getIPAdress() + "/flatmatch/insert.php?sql=" + sql);
-        } catch (MalformedURLException e) {
+            HttpResponse response = httpClient.execute(httpPost);
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteUser() {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        HttpClient httpClient = new DefaultHttpClient();
+        HttpPost httpPost = new HttpPost();
+
+        httpPost = new HttpPost("http://" + Data.getIPAdress() + "/flatmatch/deleteUser.php?email=" + Data.getLoggedInUser().getEmail());
+
+        try {
+            HttpResponse response = httpClient.execute(httpPost);
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

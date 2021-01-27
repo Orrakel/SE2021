@@ -204,7 +204,7 @@
         android:gravity="left">
 
         <TextView
-            android:id="@+id/schufa_tv"
+            android:id="@+id/profil_schufa_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Schufa"
@@ -212,14 +212,16 @@
             android:textColor="#F000">
         </TextView>
 
-        <EditText
-            android:id="@+id/schufa_et"
-            android:layout_width="50dp"
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/profil_schufa_cb"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint=""
+            android:text="ja"
             android:layout_weight="1">
 
-        </EditText>
+        </com.google.android.material.checkbox.MaterialCheckBox>
+
+
 
     </LinearLayout>
 

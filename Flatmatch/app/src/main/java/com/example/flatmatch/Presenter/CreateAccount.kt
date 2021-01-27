@@ -19,10 +19,9 @@ class CreateAccount: AppCompatActivity(){
         setContentView(R.layout.activitiy_create_account)
 
         create_account_btn.setOnClickListener {
-            val test = UserModel()
             var user = User(email_et.text.toString(), "", "", 0, "", 0.0,"", false,false,1)
             if(password_et.text.toString().equals(passwordrp_et.text.toString())) {
-                test.insertNewUser(user, password_et.text.toString())
+                UserModel.insertNewUser(user, password_et.text.toString())
                 Data.setUser(user)
                 val intent = Intent(this, Profil::class.java)
                 startActivity(intent)

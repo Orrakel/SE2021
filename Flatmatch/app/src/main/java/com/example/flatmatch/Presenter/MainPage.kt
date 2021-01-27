@@ -2,6 +2,7 @@ package com.example.flatmatch.Presenter
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -39,23 +40,12 @@ class MainPage : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activitiy_main_page)
         ButterKnife.inject(this)
-        var dataFilter: com.example.flatmatch.Data.Filter = com.example.flatmatch.Data.Filter()
 
-        val datafilter = com.example.flatmatch.Data.Filter()
-        if ( intent != null) {
-            datafilter.setFilter(
-                intent.getStringExtra("city"),
-                intent.getFloatExtra("costMin", 0.0f),
-                intent.getFloatExtra("costMax", 20000.0F),
-                intent.getFloatExtra("sizeMin", 0.0F),
-                intent.getFloatExtra("sizeMax", 300.0F),
-                intent.getIntExtra("roomsMin", 0),
-                intent.getIntExtra("roomsMax", 10),
-                intent.getBooleanExtra("arePetsAllowed", false),
-                intent.getBooleanExtra("commercialUsage", false),
-                intent.getBooleanExtra("furnishingPresent", false)
-            )
-        }
+
+            loadData()
+
+
+        println(Data.getFilter())
         toggle = ActionBarDrawerToggle(this, drawerLayout,
                 R.string.open,
                 R.string.close
@@ -96,6 +86,7 @@ class MainPage : AppCompatActivity(){
                 flingContainer.selectedItemPosition
                 Toast.makeText(this@MainPage, "Like! ", Toast.LENGTH_SHORT).show()
                 Data.setLessor(Lessor(apartmentBefore.lessorMail,null))
+                println(apartmentBefore.city)
                 ApartmentModel.insertLike(apartmentBefore)
             }
 
@@ -138,7 +129,7 @@ class MainPage : AppCompatActivity(){
 
 
                         dialogBuilder = AlertDialog.Builder(this@MainPage)
-                        var popUpView: View = layoutInflater.inflate(R.layout.popup_menu, null)
+                        val popUpView: View = layoutInflater.inflate(R.layout.popup_menu, null)
                         city = popUpView.findViewById(R.id.popUp_city)
                         cost = popUpView.findViewById(R.id.popUp_cost)
                         rooms = popUpView.findViewById(R.id.popUp_rooms)
@@ -189,7 +180,16 @@ class MainPage : AppCompatActivity(){
         }
         return super.onOptionsItemSelected(item)
     }
-    fun createPopup(){
 
+    private fun loadData()
+    {
+//        val sharedPreferences: SharedPreferences = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
+//        if(sharedPreferences.contains("sharedPref")) {
+//            Data.setFilter(com.example.flatmatch.Data.Filter(sharedPreferences.getString("filterCity", null), sharedPreferences.getFloat("filterSizeMin", -1.0f),
+//                    sharedPreferences.getFloat("filterSizeMax", -1.0f), sharedPreferences.getInt("filterRoomsMin", -1), sharedPreferences.getInt("filterRoomsMax", -1),
+//                    sharedPreferences.getBoolean("filterPets", false), sharedPreferences.getFloat("filterCostsMin", -1.0f), sharedPreferences.getFloat("filterCostsMax", -1.0f),
+//                    sharedPreferences.getBoolean("filterCommercial", false), sharedPreferences.getBoolean("filterFurnishing", false)))
+//            println(Data.getFilter().city.toString())
+//        }
     }
 }

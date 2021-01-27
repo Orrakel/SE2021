@@ -8,6 +8,7 @@ public class Data {
     private static ArrayList<Apartment> likes = null;
     private static ArrayList<Apartment> matches = null;
     private static String ipAdress = "192.168.43.35";
+    private static Filter filter = null;
 
     public static void setUser(User user) { loggedInUser = user; }
     public static User getLoggedInUser() { return loggedInUser; }
@@ -22,4 +23,7 @@ public class Data {
     public static ArrayList<Apartment> getMatches() { return matches; }
 
     public static String getIPAdress() { return ipAdress; }
+
+    public static void setFilter(Filter filter_){ filter = filter_;}
+    public static Filter getFilter(){return filter;}
 }

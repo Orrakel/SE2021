@@ -51,19 +51,16 @@ class Profil: AppCompatActivity(){
         salary_et.setText((user.income.toString()))
         job_et.setText(user.job.toString())
 
-        schufa_et.setText(user.schufaYesNo.toString())
+        profil_schufa_cb.isChecked = user.schufa
+        pet_cb.isChecked = user.pet
 
         safe_profil_btn.setOnClickListener {
 
-            var schufa = false
-            if(schufa_et.text.toString().equals("Yes"))
-            {
-                schufa = true
-            }
+
 
 
             val user2:User = User(user.email.toString(), name_et.text.toString(),lastname_et.text.toString(),age_et.text.toString().toInt(), "", salary_et.text.toString().toDouble(), job_et.text.toString(),
-            schufa, pet_cb.isChecked,  people_et.text.toString().toInt())
+            profil_schufa_cb.isChecked, pet_cb.isChecked,  people_et.text.toString().toInt())
             Data.setUser(user2)
             //test.updateUser(user2)
 

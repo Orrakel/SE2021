@@ -15,10 +15,10 @@ if(isset($_GET["maxSize"]) && $_GET["maxSize"] != 0 && $_GET["maxSize"] != 0) {
 	$sql .= " and size <= " . $_GET["maxSize"];
 }
 if(isset($_GET["minRooms"]) && $_GET["minRooms"] != 0 && $_GET["minRooms"] != 0) {
-	$sql .= " and rooms >= " . $_GET["minRooms"];
+	$sql .= " and room >= " . $_GET["minRooms"];
 }
 if(isset($_GET["maxRooms"]) && $_GET["maxRooms"] != 0 && $_GET["maxRooms"] != 0) {
-	$sql .= " and rooms <= " . $_GET["maxRooms"];
+	$sql .= " and room <= " . $_GET["maxRooms"];
 }
 if(isset($_GET["petsAllowed"]) && $_GET["petsAllowed"] != 0 && $_GET["petsAllowed"] != "NA") {
 	$sql .= " and petallowed = '" . $_GET["petsAllowed"] . "'";

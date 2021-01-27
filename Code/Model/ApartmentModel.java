@@ -6,6 +6,11 @@ import com.example.flatmatch.Data.Apartment;
 import com.example.flatmatch.Data.Data;
 import com.example.flatmatch.Data.User;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -161,7 +166,7 @@ public class ApartmentModel {
         ArrayList<Apartment> apartments = null;
 
         try {
-            selectUser = new URL("http://" + Data.getIPAdress() + "/flatmatch/selectLikes.php?email=" + Data.getLoggedInLessor().getEmail());
+            selectUser = new URL("http://" + Data.getIPAdress() + "/flatmatch/selectLikes.php?email=" + Data.getLoggedInUser().getEmail());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -204,7 +209,7 @@ public class ApartmentModel {
         ArrayList<Apartment> apartments = null;
 
         try {
-            selectUser = new URL("http://" + Data.getIPAdress() + "/flatmatch/selectLikes.php?email=" + Data.getLoggedInLessor().getEmail());
+            selectUser = new URL("http://" + Data.getIPAdress() + "/flatmatch/selectLikes.php?email=" + Data.getLoggedInUser().getEmail());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -266,7 +271,8 @@ public class ApartmentModel {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        URL insertApartment = null;
+        HttpClient httpClient = new DefaultHttpClient();
+        HttpPost httpPost = new HttpPost();
 
         String sql = "INSERT INTO apartment (city, zip, street, housenumber, email, size, petallowed, room, costs, commercialusage, furnishing, description)  VALUES " +
                 "('" + newApartment.getCity() + "', " +
@@ -281,9 +287,15 @@ public class ApartmentModel {
                 "'" + newApartment.getFurnishingYesNo() + "', " +
                 "'" + newApartment.getDescription() + "')";
 
+        sql = sql.replace(" ", "%20");
+
+        httpPost = new HttpPost("http://" + Data.getIPAdress() + "/flatmatch/insert.php?sql=" + sql);
+
         try {
-            insertApartment = new URL("http://" + Data.getIPAdress() + "/flatmatch/insert.php?sql=" + sql);
-        } catch (MalformedURLException e) {
+            HttpResponse response = httpClient.execute(httpPost);
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -294,7 +306,8 @@ public class ApartmentModel {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        URL insertApartment = null;
+        HttpClient httpClient = new DefaultHttpClient();
+        HttpPost httpPost = new HttpPost();
 
         String sql = "INSERT INTO likes (city, zip, street, housenumber, email, email_0)  VALUES " +
                 "('" + newLikedApartment.getCity() + "', " +
@@ -304,9 +317,15 @@ public class ApartmentModel {
                 "'" + Data.getLoggedInLessor().getEmail() + "', " +
                 "'" + newLikedApartment.getLessorMail() + ")";
 
+        sql = sql.replace(" ", "%20");
+
+        httpPost = new HttpPost("http://" + Data.getIPAdress() + "/flatmatch/insert.php?sql=" + sql);
+
         try {
-            insertApartment = new URL("http://" + Data.getIPAdress() + "/flatmatch/insert.php?sql=" + sql);
-        } catch (MalformedURLException e) {
+            HttpResponse response = httpClient.execute(httpPost);
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -317,19 +336,26 @@ public class ApartmentModel {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        URL insertApartment = null;
+        HttpClient httpClient = new DefaultHttpClient();
+        HttpPost httpPost = new HttpPost();
 
-        String sql = "INSERT INTO apartment (city, zip, street, housenumber, Usersemail, lessoremail)  VALUES " +
-                "('" + newApartmentMatch.getCity() + "', " +
+        String sql = "INSERT INTO apartment (city, zip, street, housenumber, Usersemail, lessoremail) VALUES " +
+                "('" + newApartmentMatch.getCity() + "'," +
                 "'" + newApartmentMatch.getZip() + "', " +
                 "'" + newApartmentMatch.getStreet() + "', " +
                 "'" + newApartmentMatch.getHousenumber() + "', " +
                 "'" + Data.getLoggedInLessor().getEmail() + "', " +
                 "'" + newApartmentMatch.getLessorMail() + "')";
 
+        sql = sql.replace(" ", "%20");
+
+        httpPost = new HttpPost("http://" + Data.getIPAdress() + "/flatmatch/insert.php?sql=" + sql);
+
         try {
-            insertApartment = new URL("http://" + Data.getIPAdress() + "/flatmatch/insert.php?sql=" + sql);
-        } catch (MalformedURLException e) {
+            HttpResponse response = httpClient.execute(httpPost);
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

@@ -7,10 +7,10 @@ if ($db->connect_errno) {
 }
 
 $sql = "select * from apartment ";
-$sql .= "where city in(select city from likes where email_0 = '" . $_GET['email'] . "') ";
-$sql .= "and zip in(select zip from likes where email_0 = '" . $_GET['email'] . "') ";
-$sql .= "and street in(select street from likes where email_0 = '" . $_GET['email'] . "') ";
-$sql .= "and housenumber in(select housenumber from likes where email_0 = '" . $_GET['email'] . "') ";
+$sql .= "where city in(select city from matches where lessoremail = '" . $_GET['email'] . "')";
+$sql .= "and zip in(select zip from matches where lessoremail = '" . $_GET['email'] . "')";
+$sql .= "and street in(select street from matches where lessoremail = '" . $_GET['email'] . "')";
+$sql .= "and housenumber in(select housenumber from matches where lessoremail = '" . $_GET['email'] . "')";
 
 $output = "";
 

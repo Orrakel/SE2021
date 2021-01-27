@@ -6,7 +6,11 @@ if ($db->connect_errno) {
     die("Verbindung fehlgeschlagen: " . $db->connect_error);
 }
 
-$sql = str_replace("%20", " ", $_GET["sql"]);
+$sql = "DELETE FROM Users ";
+$sql .= "WHERE email = '" . $_GET['email'] . "' ";
 
 $db->query($sql);
+
+echo $sql;
+
 ?>

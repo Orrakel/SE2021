@@ -57,8 +57,6 @@ class Filter  : AppCompatActivity() {
             if(Data.getFilter().costsMax > -1)filter_costsmax_et.setText(Data.getFilter().costsMax.toString())
             filter_commercialUsageYes.isChecked = Data.getFilter().commercialusageYesNo
             filter_furnishingYes.isChecked = Data.getFilter().furnishingYesNo
-
-
         }
 
         filter_safeFilter_btn.setOnClickListener{

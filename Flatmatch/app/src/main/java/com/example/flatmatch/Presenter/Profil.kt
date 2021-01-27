@@ -59,7 +59,7 @@ class Profil: AppCompatActivity(){
 
 
 
-            val user2:User = User(user.email.toString(), name_et.text.toString(),lastname_et.text.toString(),age_et.text.toString().toInt(), "", salary_et.text.toString().toDouble(), job_et.text.toString(),
+            val user2:User = User(user.email.toString(), name_et.text.toString(),lastname_et.text.toString(),age_et.text.toString().toInt(), user.picture, salary_et.text.toString().toDouble(), job_et.text.toString(),
             profil_schufa_cb.isChecked, pet_cb.isChecked,  people_et.text.toString().toInt())
             Data.setUser(user2)
             //test.updateUser(user2)

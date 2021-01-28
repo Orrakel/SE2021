@@ -241,6 +241,122 @@ public class ApartmentModel {
         return apartments;
     }
 
+    public static ArrayList<Apartment> getLessorMatches() {
+        String input = "";
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        URL selectUser = null;
+        BufferedReader br = null;
+        ArrayList<Apartment> apartments = null;
+
+        try {
+            selectUser = new URL("http://" + Data.getIPAdress() + "/flatmatch/selectLikes.php?email=" + Data.getLoggedInLessor().getEmail());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            br = new BufferedReader(new InputStreamReader(selectUser.openStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            input = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Login: " + input);
+
+        if(input.equals("{}"))
+            return null;
+
+        try {
+            apartments = buildApartmentList(input);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return apartments;
+    }
+
+    public static ArrayList<Apartment> getFilteredApartments(String city, double minSize,
+                                                             double maxSize, int minRooms,
+                                                             int maxRooms, boolean petsAllowed,
+                                                             double minCosts, double maxCosts,
+                                                             boolean commercialUsage, boolean furnishing) {
+        String input = "";
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        URL selectUser = null;
+        BufferedReader br = null;
+        ArrayList<Apartment> apartments = null;
+
+        String petsAllowedYesNo = "NA";
+        String commercialUsageYesNo = "NA";
+        String furnishingYesNo = "NA";
+
+        if(city == null || city.equals(""))
+            city = "Minden";
+
+        if(petsAllowed)
+            petsAllowedYesNo = "Yes";
+
+        if(commercialUsage)
+            commercialUsageYesNo = "Yes";
+
+        if(furnishing)
+            furnishingYesNo = "Yes";
+
+        try {
+            selectUser = new URL("http://" + Data.getIPAdress() + "/flatmatch/selectFilteredApartment.php?" +
+                    "city=" + city + "&minSize=" + minSize + "&maxSize=" + maxSize +
+                    "&minRooms=" + minRooms + "&maxRooms=" + maxRooms + "&petsAllowed=" + petsAllowedYesNo +
+                    "&minCosts=" + minCosts + "&maxCosts=" + maxCosts + "&commercialUsage=" + commercialUsageYesNo +
+                    "&furnishing=" + furnishingYesNo);
+
+            System.out.println("http://" + Data.getIPAdress() + "/flatmatch/selectFilteredApartment.php?" +
+                    "city=" + city + "&minSize=" + minSize + "&maxSize=" + maxSize +
+                    "&minRooms=" + minRooms + "&maxRooms=" + maxRooms + "&petsAllowed=" + petsAllowedYesNo +
+                    "&minCosts=" + minCosts + "&maxCosts=" + maxCosts + "&commercialUsage=" + commercialUsageYesNo +
+                    "&furnishing=" + furnishingYesNo);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            br = new BufferedReader(new InputStreamReader(selectUser.openStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            input = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Login: " + input);
+
+        if(input.equals("{}"))
+            return null;
+
+        try {
+            apartments = buildApartmentList(input);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return apartments;
+    }
+
     private static ArrayList<Apartment> buildApartmentList(String input) throws JSONException {
         ArrayList<Apartment> apartments = new ArrayList<>();
         JSONObject apartmentsInput = new JSONObject(input);
@@ -315,7 +431,7 @@ public class ApartmentModel {
                 "'" + newLikedApartment.getStreet() + "', " +
                 "'" + newLikedApartment.getHousenumber() + "', " +
                 "'" + Data.getLoggedInLessor().getEmail() + "', " +
-                "'" + newLikedApartment.getLessorMail() + ")";
+                "'" + newLikedApartment.getLessorMail() + "')";
 
         sql = sql.replace(" ", "%20");
 

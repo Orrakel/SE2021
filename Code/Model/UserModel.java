@@ -78,8 +78,7 @@ public class UserModel {
     }
 
     /**
-     * Der String, aus der Datenbank, wird zu einem Player umgewandelt.
-     * Dafür werden auch die Deckinformationen ausgewertet.
+     * Der String, aus der Datenbank, wird zu einem User umgewandelt.
      *
      * @param input Der Datenbank-String
      */
@@ -101,65 +100,12 @@ public class UserModel {
         Data.setUser(user);
     }
 
-    public static ArrayList<User> getLikesFromApartment(Apartment apartment) throws JSONException {
-        String input = "";
-
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
-        URL selectUser = null;
-        BufferedReader br = null;
-
-        try {
-            selectUser = new URL("http://" + Data.getIPAdress() +
-                    "/flatmatch/selectApartmentLikes.php?city=" + apartment.getCity() + "&zip=" + apartment.getZip() +
-                    "&street=" + apartment.getStreet() + "&housenumber=" + apartment.getHousenumber());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            br = new BufferedReader(new InputStreamReader(selectUser.openStream()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            input = br.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println("Login: " + input);
-
-        return buildUserList(input);
-    }
-
-    private static ArrayList<User> buildUserList(String input) throws JSONException {
-        ArrayList<User> users = new ArrayList<>();
-        JSONObject userInput = new JSONObject(input);
-
-        JSONObject apartmentsInput = new JSONObject(input);
-        JSONArray allApartments = apartmentsInput.getJSONArray("users");
-
-        for( int i = 0 ; i < allApartments.length()-1 ; i++) {
-            User user = new User(userInput.getString("email"),
-                    userInput.getString("firstname"),
-                    userInput.getString("lastname"),
-                    userInput.getInt("age"),
-                    userInput.getString("picture"),
-                    userInput.getDouble("income"),
-                    userInput.getString("firstname"),
-                    userInput.getString("schufa").equals("yes"),
-                    userInput.getString("pet").equals("yes"),
-                    userInput.getInt("persons"));
-
-            users.add(user);
-        }
-
-        return users;
-    }
-
+    /**
+     * Ein neuer Benutzer wird in die Datenbank aufgenommen
+     *
+     * @param newUser neu erzeugter Benutzer
+     * @param password Passwort des neuen Benutzers
+     */
     public static void insertNewUser(User newUser, String password) {
         String input = "";
 
@@ -197,7 +143,12 @@ public class UserModel {
         }
     }
 
-    public static void updateUser(User newUser) {
+    /**
+     * Der eingeoggte Benutzer wird in der Datenbank geändert.
+     *
+     * @param updatedUser geupdatete Benutzer
+     */
+    public static void updateUser(User updatedUser) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
@@ -205,16 +156,16 @@ public class UserModel {
         HttpPost httpPost = new HttpPost();
 
         String sql = "UPDATE Users SET " +
-                "firstname = '" + newUser.getFirstname() + "', " +
-                "lastname = '" + newUser.getLastname() + "', " +
-                "age = '" + newUser.getAge() + "', " +
-                "picture = '" + newUser.getPicture() + "', " +
-                "income = '" + newUser.getIncome() + "', " +
-                "job = '" + newUser.getJob() + "', " +
-                "schufa = '" + newUser.getSchufaYesNo() + "', " +
-                "pet = '" + newUser.getPetYesNo() + "', " +
-                "persons = '" + newUser.getPersons() + "' " +
-                "WHERE email = '" + newUser.getEmail() + "'";
+                "firstname = '" + updatedUser.getFirstname() + "', " +
+                "lastname = '" + updatedUser.getLastname() + "', " +
+                "age = '" + updatedUser.getAge() + "', " +
+                "picture = '" + updatedUser.getPicture() + "', " +
+                "income = '" + updatedUser.getIncome() + "', " +
+                "job = '" + updatedUser.getJob() + "', " +
+                "schufa = '" + updatedUser.getSchufaYesNo() + "', " +
+                "pet = '" + updatedUser.getPetYesNo() + "', " +
+                "persons = '" + updatedUser.getPersons() + "' " +
+                "WHERE email = '" + updatedUser.getEmail() + "'";
 
         sql = sql.replace(" ", "%20");
 
@@ -229,6 +180,9 @@ public class UserModel {
         }
     }
 
+    /**
+     * Ein Benutzer wird gelöscht
+     */
     public static void deleteUser() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);

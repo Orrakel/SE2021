@@ -7,14 +7,14 @@ if ($db->connect_errno) {
 }
 
 $sql = "select * from apartment ";
-$sql .= "where city not in(select city from likes)";
-$sql .= "and zip not in(select zip from likes)";
-$sql .= "and street not in(select street from likes)";
-$sql .= "and housenumber not in(select housenumber from likes)";
-$sql .= "and city not in(select city from matches)";
-$sql .= "and zip not in(select zip from matches)";
-$sql .= "and street not in(select street from matches)";
-$sql .= "and housenumber not in(select housenumber from matches)";
+$sql .= "where city not in(select city from likes where email ='" . $_GET["email"] . "')";
+$sql .= "and zip not in(select zip from likes where email ='" . $_GET["email"] . "')";
+$sql .= "and street not in(select street from likes where email ='" . $_GET["email"] . "')";
+$sql .= "and housenumber not in(select housenumber from likes where email ='" . $_GET["email"] . "')";
+$sql .= "and city not in(select city from matches where Usersemail ='" . $_GET["email"] . "')";
+$sql .= "and zip not in(select zip from matches where Usersemail ='" . $_GET["email"] . "')";
+$sql .= "and street not in(select street from matches where Usersemail ='" . $_GET["email"] . "')";
+$sql .= "and housenumber not in(select housenumber from matches where Usersemail ='" . $_GET["email"] . "')";
 
 $output = "";
 

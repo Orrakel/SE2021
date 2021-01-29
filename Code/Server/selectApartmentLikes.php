@@ -9,10 +9,10 @@ if ($db->connect_errno) {
 $sql = "select * from users ";
 $sql .= " where email in(SELECT email FROM likes";
 $sql .= " WHERE city = '" . $_GET["city"] . "'";
-$sql .= " AND zip = " . $_GET["zip"] . "'";
-$sql .= " AND street = " . $_GET["street"] . "'";
-$sql .= " AND housenumber = " . $_GET["housenumber"] . "'";
-$sql .= . ")"
+$sql .= " AND zip = '" . $_GET["zip"] . "'";
+$sql .= " AND street = '" . $_GET["street"] . "'";
+$sql .= " AND housenumber = '" . $_GET["housenumber"] . "'";
+$sql .= ")";
 
 $output = "";
 

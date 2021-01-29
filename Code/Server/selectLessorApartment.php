@@ -7,7 +7,7 @@ if ($db->connect_errno) {
 }
 
 $sql = "select * from apartment ";
-$sql .= "where email = " . $_GET["email"];
+$sql .= "where email = '" . $_GET["email"] . "'";
 
 $output = "";
 

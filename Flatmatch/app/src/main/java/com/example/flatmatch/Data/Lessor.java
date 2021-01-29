@@ -12,4 +12,5 @@ public class Lessor {
     }
 
     public String getEmail() { return this.email; }
+    public ArrayList<Apartment> getApartments(){return apartments;}
 }

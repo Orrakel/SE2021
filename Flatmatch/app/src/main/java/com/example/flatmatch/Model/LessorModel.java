@@ -62,7 +62,7 @@ public class LessorModel {
             e.printStackTrace();
         }
 
-        System.out.println("Login: " + input);
+        System.out.println("isLoginCorrect Login: " + input);
 
         if(input.equals("{}"))
             return false;
@@ -86,6 +86,8 @@ public class LessorModel {
     private static void buildLessor(String input) throws JSONException {
         JSONObject lessorInput = new JSONObject(input);
         ArrayList<Apartment> apartments = new ArrayList<>();
+        System.out.println("buildLessor " + lessorInput.getString("email"));
+        System.out.println("buildLessor " + input);
 
         apartments = ApartmentModel.getLessorApartments(lessorInput.getString("email"));
 

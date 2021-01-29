@@ -49,4 +49,10 @@ public class User {
     public Boolean getSchufa(){return schufa;}
 
     public int getPersons() { return this.persons; }
+
+    public String toString()
+    {
+        return "Name: " + getFirstname() + " " + getLastname()
+                +"\n" + "Einkommen: " + getIncome();
+    }
 }

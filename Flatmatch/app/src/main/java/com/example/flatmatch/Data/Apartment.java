@@ -43,12 +43,15 @@ public class Apartment {
     public float getSize() { return this.size; }
 
     public String getPetallowedYesNo() { return this.arePetsAllowed?"yes":"no"; }
+    public Boolean getPets(){return arePetsAllowed;}
 
     public int getRoom() { return this.rooms; }
 
     public String getCommercialusageYesNo() { return this.commercialUsageAllowed?"yes":"no"; }
+    public Boolean getCommercial(){return commercialUsageAllowed;}
 
     public String getFurnishingYesNo() { return this.furnishingPresent?"yes":"no"; }
+    public Boolean getFurnishing(){ return furnishingPresent;}
 
     public String getDescription() { return this.description; }
 

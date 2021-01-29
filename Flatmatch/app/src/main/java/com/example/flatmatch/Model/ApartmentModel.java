@@ -138,7 +138,7 @@ public class ApartmentModel {
             e.printStackTrace();
         }
 
-        System.out.println("Login: " + input);
+        System.out.println("getLessorApartment Login: " + input);
 
         if (input.equals("{}"))
             return null;
@@ -344,11 +344,12 @@ public class ApartmentModel {
                 "'" + newApartmentMatch.getZip() + "', " +
                 "'" + newApartmentMatch.getStreet() + "', " +
                 "'" + newApartmentMatch.getHousenumber() + "', " +
-                "'" + Data.getLoggedInLessor().getEmail() + "', " +
+                "'" + Data.getLoggedInUser().getEmail() + "', " +
                 "'" + newApartmentMatch.getLessorMail() + "')";
 
+        System.out.println("insertMatch: " + sql);
         sql = sql.replace(" ", "%20");
-
+        System.out.println("insertMatch: " + sql);
         httpPost = new HttpPost("http://" + Data.getIPAdress() + "/flatmatch/insert.php?sql=" + sql);
 
         try {

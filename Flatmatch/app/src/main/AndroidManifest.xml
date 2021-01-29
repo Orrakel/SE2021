@@ -32,7 +32,9 @@
         <activity android:name="com.example.flatmatch.Presenter.Settings" />
         <activity android:name=".Presenter.Filter" />
         <activity android:name=".Presenter.Chat" />
-        <activity android:name=".Presenter.ApartmentList"></activity>
+        <activity android:name=".Presenter.ApartmentList" />
+        <activity android:name=".Presenter.MainPage_Lessor" />
+        <activity android:name=".Presenter.ApartmentShow" />
     </application>
 
 </manifest>

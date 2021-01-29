@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.flatmatch.Data.Apartment
 import com.example.flatmatch.Model.ApartmentModel
 import com.example.flatmatch.Adapter.FlatAdapter
+import com.example.flatmatch.Data.Data
 import com.example.flatmatch.R
 import kotlinx.android.synthetic.main.activitiy_main_page.drawerLayout
 import kotlinx.android.synthetic.main.activitiy_main_page.navView
@@ -37,17 +38,20 @@ class ApartmentList : AppCompatActivity(), FlatAdapter.OnItemClickListener{
 
         navView.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.mHome -> startActivity(Intent(this, MainPage::class.java))
+                R.id.mHome -> startActivity(Intent(this, MainPage_Lessor::class.java))
                 R.id.mMatches -> startActivity(Intent(this, MatchList::class.java))
-                R.id.mObjects -> startActivity(Intent(this, Filter::class.java))
-                R.id.mSettings -> startActivity(Intent(this, Settings::class.java))
+                R.id.mObjects -> startActivity(Intent(this, ApartmentList::class.java))
+                R.id.mSettings -> startActivity(Intent(this, Settings_lessor::class.java))
 
             }
             true
         }
-
-        objectList = ApartmentModel.getLessorMatches().toMutableList()
-
+        objectList = java.util.ArrayList<Apartment>()
+        println("ApartmentList: " + Data.getLoggedInLessor().email)
+        //objectList = ApartmentModel.getLessorApartments(Data.getLoggedInLessor().email).toMutableList()
+        objectList.add(Apartment("BadSalzuflen", "32107", "DetmolderWeg", "3",
+                    120.0f, true, 2, 750.0f, false, true,
+                    "HierwohnteeineBerühmtheitdasistwahrglaubensiemir.", "nkoetter@e-mail.de"))
         println(objectList)
         val adapter = FlatAdapter(objectList, this)
         rvLikes.adapter = adapter
@@ -71,7 +75,7 @@ class ApartmentList : AppCompatActivity(), FlatAdapter.OnItemClickListener{
     override fun onItemClick(position: Int) {
         Toast.makeText(this, "Item $position clicked", Toast.LENGTH_SHORT).show()
         val clickedItem = objectList[position]
-        Intent(this, MatchShow::class.java).also{
+        Intent(this, ApartmentShow::class.java).also{
             it.putExtra("position",position)
             startActivity(it)
         }

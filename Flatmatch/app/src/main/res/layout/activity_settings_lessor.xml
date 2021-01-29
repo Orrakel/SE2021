@@ -2,7 +2,7 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/settings_drawerLayout"
+    android:id="@+id/settingsLessor_drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -12,16 +12,16 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-       <Button
-           android:id="@+id/settings_changePW_btn"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="Passwort ändern">
+        <Button
+            android:id="@+id/settingsLessor_changePW_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Passwort ändern">
 
-       </Button>
+        </Button>
 
         <Button
-            android:id="@+id/settings_logout_btn"
+            android:id="@+id/settingsLessor_logout_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Abmelden">
@@ -31,11 +31,11 @@
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/settings_navView"
+        android:id="@+id/settingsLessor_navView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/nav_header_menu"
+        app:menu="@menu/nav_header_menu_lessor"
         android:layout_gravity="start"
         android:fitsSystemWindows="true">
 

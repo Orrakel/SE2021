@@ -10,12 +10,14 @@ import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import com.example.flatmatch.Data.Apartment
 import com.example.flatmatch.Data.Data
+import com.example.flatmatch.Data.Lessor
 import com.example.flatmatch.Model.ApartmentModel
 import com.example.flatmatch.Model.LessorModel
 import com.example.flatmatch.Model.UserModel
 import com.example.flatmatch.Presenter.CreateAccount
 import com.example.flatmatch.Presenter.ForgotPassword
 import com.example.flatmatch.Presenter.MainPage
+import com.example.flatmatch.Presenter.MainPage_Lessor
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -39,7 +41,7 @@ class MainActivity : AppCompatActivity() {
                 //var status = if(UserModel.isLoginCorrect(username_et.text.toString(),password_et.text.toString())) "Login Erfolgreich" else "Login fehlgeschlagen"
                 //println(UserModel.isLoginCorrect("anolting@e-mail.de","1234"))
                 //var status = if(UserModel.isLoginCorrect("anolting@e-mail.de","1234")) "Login Erfolgreich" else "Login fehlgeschlagen"
-                var status = if (UserModel.isLoginCorrect("kneitmann@e-mail.de", "4321")
+                var status = if (UserModel.isLoginCorrect("anolting@e-mail.de", "1234")
                 ) "Login Erfolgreich" else "Login fehlgeschlagen"
                 Toast.makeText(this, status, LENGTH_SHORT).show()
                 if (status.equals("Login Erfolgreich")) {
@@ -50,12 +52,15 @@ class MainActivity : AppCompatActivity() {
             }
             else if(radioButton.id == R.id.login_lessor_rb)
             {
-                var status = if (LessorModel.isLoginCorrect("nkoetter@e-mail.de", "1234")
+                val status = if (LessorModel.isLoginCorrect("nkoetter@e-mail.de", "1234")
                 ) "Login Erfolgreich" else "Login fehlgeschlagen"
                 Toast.makeText(this, status, LENGTH_SHORT).show()
                 if (status.equals("Login Erfolgreich")) {
-
-                    val intent = Intent(this, MainPage::class.java)
+                    if(Data.getLoggedInLessor().apartments != null) {
+                        println("MainActivity Lessor " + Data.getLoggedInLessor().apartments[0])
+                        Data.setApartment(ApartmentModel.getLessorApartments(Data.getLoggedInLessor().email)[0])
+                    }
+                    val intent = Intent(this, MainPage_Lessor::class.java)
                     startActivity(intent)
                 }
             }

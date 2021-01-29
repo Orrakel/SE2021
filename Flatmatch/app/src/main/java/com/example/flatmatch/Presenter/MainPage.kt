@@ -16,6 +16,7 @@ import com.example.flatmatch.Data.Apartment
 import com.example.flatmatch.Data.Data
 import com.example.flatmatch.Data.Lessor
 import com.example.flatmatch.Model.ApartmentModel
+import com.example.flatmatch.Model.UserModel
 import com.example.flatmatch.R
 import com.lorentzos.flingswipe.SwipeFlingAdapterView
 import com.lorentzos.flingswipe.SwipeFlingAdapterView.onFlingListener
@@ -38,7 +39,7 @@ class MainPage : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if(Data.getLoggedInUser() != null) {
+
             setContentView(R.layout.activitiy_main_page)
             toggle = ActionBarDrawerToggle(this, drawerLayout,
                 R.string.open,
@@ -59,33 +60,12 @@ class MainPage : AppCompatActivity(){
                 }
                 true
             }
-        }
-        else
-        {
-            setContentView(R.layout.activitiy_main_page_lessor)
-            toggle = ActionBarDrawerToggle(this, drawerLayout,
-                R.string.open,
-                R.string.close
-            )
-            drawerLayout.addDrawerListener(toggle)
-            toggle.syncState()
 
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-            navView.setNavigationItemSelectedListener {
-                when (it.itemId) {
-                    R.id.mObjects -> startActivity(Intent(this, ApartmentList::class.java))
-                    R.id.mMatches -> startActivity(Intent(this, MatchList::class.java))
-                    R.id.mSettings -> startActivity(Intent(this, Settings::class.java))
-                    R.id.mHome -> startActivity(Intent(this, MainPage::class.java))
-                }
-                true
-            }
-        }
         ButterKnife.inject(this)
         apartments = java.util.ArrayList<Apartment>()
 
-        if(Data.getLoggedInUser() != null) {
+
             loadData()
             if (Data.getFilter() != null) {
                 println(
@@ -113,14 +93,11 @@ class MainPage : AppCompatActivity(){
                     Data.getFilter().furnishingYesNo
                 )
             } else {
+
                 apartments = ApartmentModel.getAllApartments()
             }
-        }
-        else
-        {
-            println("MainPage: " )
-            apartments = ApartmentModel.getAllApartments()
-        }
+
+
 
             arrayAdapter = ArrayAdapter(this, R.layout.item, R.id.helloText, apartments)
 

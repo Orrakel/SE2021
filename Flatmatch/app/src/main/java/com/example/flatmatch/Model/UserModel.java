@@ -2,6 +2,7 @@ package com.example.flatmatch.Model;
 
 import android.os.StrictMode;
 
+import com.example.flatmatch.Data.Apartment;
 import com.example.flatmatch.Data.Data;
 import com.example.flatmatch.Data.User;
 
@@ -10,6 +11,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class UserModel {
 
@@ -97,6 +100,8 @@ public class UserModel {
 
         Data.setUser(user);
     }
+
+
 
     public static void insertNewUser(User newUser, String password) {
         String input = "";
@@ -183,5 +188,64 @@ public class UserModel {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static ArrayList<User> getLikesFromApartment(Apartment apartment) throws JSONException {
+        String input = "";
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        URL selectUser = null;
+        BufferedReader br = null;
+
+        try {
+            selectUser = new URL("http://" + Data.getIPAdress() +
+                    "/flatmatch/selectApartmentLikes.php?city=" + apartment.getCity() + "&zip=" + apartment.getZip() +
+                    "&street=" + apartment.getStreet() + "&housenumber=" + apartment.getHousenumber());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            br = new BufferedReader(new InputStreamReader(selectUser.openStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            input = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Login: " + input);
+
+        return buildUserList(input);
+    }
+
+    private static ArrayList<User> buildUserList(String input) throws JSONException {
+        ArrayList<User> users = new ArrayList<>();
+        JSONObject userInput = new JSONObject(input);
+
+        JSONObject apartmentsInput = new JSONObject(input);
+        JSONArray allApartments = apartmentsInput.getJSONArray("users");
+
+        for( int i = 0 ; i < allApartments.length()-1 ; i++) {
+            User user = new User(userInput.getString("email"),
+                    userInput.getString("firstname"),
+                    userInput.getString("lastname"),
+                    userInput.getInt("age"),
+                    userInput.getString("picture"),
+                    userInput.getDouble("income"),
+                    userInput.getString("firstname"),
+                    userInput.getString("schufa").equals("yes"),
+                    userInput.getString("pet").equals("yes"),
+                    userInput.getInt("persons"));
+
+            users.add(user);
+        }
+
+        return users;
     }
 }

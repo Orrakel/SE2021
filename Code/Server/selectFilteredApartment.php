@@ -36,8 +36,6 @@ if(isset($_GET["furnishing"]) && $_GET["furnishing"] != 0 && $_GET["petsAllowed"
 	$sql .= " and furnishing = '" . $_GET["furnishing"] . "'";
 }
 
-echo $sql;
-
 $output = "";
 
 $output .= '{"apartments":[';

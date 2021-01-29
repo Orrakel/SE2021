@@ -15,9 +15,9 @@ import androidx.appcompat.app.AppCompatActivity
 import butterknife.ButterKnife
 import com.example.flatmatch.Data.Apartment
 import com.example.flatmatch.Data.Data
-import com.example.flatmatch.Data.Lessor
 import com.example.flatmatch.Data.User
 import com.example.flatmatch.Model.ApartmentModel
+import com.example.flatmatch.Model.LessorModel
 import com.example.flatmatch.Model.UserModel
 import com.example.flatmatch.R
 import com.lorentzos.flingswipe.SwipeFlingAdapterView
@@ -33,7 +33,9 @@ class MainPage_Lessor  : AppCompatActivity(){
     lateinit var arrayAdapter: ArrayAdapter<User>
 
 
-
+    /**
+     * erstellung der Mainpage für den Vermieter
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -51,8 +53,8 @@ class MainPage_Lessor  : AppCompatActivity(){
             navView.setNavigationItemSelectedListener {
                 when (it.itemId) {
                     R.id.mObjects -> startActivity(Intent(this, ApartmentList::class.java))
-                    R.id.mMatches -> startActivity(Intent(this, MatchList::class.java))
-                    R.id.mSettings -> startActivity(Intent(this, Settings_lessor::class.java))
+                    R.id.mMatches -> startActivity(Intent(this, MatchList_Lessor::class.java))
+                    R.id.mSettings -> startActivity(Intent(this, SettingsLessor::class.java))
                     R.id.mHome -> startActivity(Intent(this, MainPage_Lessor::class.java))
                 }
                 true
@@ -62,17 +64,20 @@ class MainPage_Lessor  : AppCompatActivity(){
         users = java.util.ArrayList<User>()
 
             println("MainPage_Lessor: " + Data.getApartment())
-//            users = UserModel.getLikesFromApartment(Apartment("BadSalzuflen", "32107", "DetmolderWeg", "3",
-//                    120.0f, true, 2, 750.0f, false, true,
-//                    "HierwohnteeineBerühmtheitdasistwahrglaubensiemir.", "nkoetter@e-mail.de"))
 
-        users.add(User("anolting@e-mail.de", "Alex", "Sucher", 27, "test", 1000.0, "bubun", true, true, 1))
+
+        users = LessorModel.getLikesFromApartment(Data.getApartment())
+        println(users)
         arrayAdapter = ArrayAdapter(this, R.layout.item, R.id.helloText, users)
 
         val flingContainer: SwipeFlingAdapterView = findViewById(R.id.frame)
         flingContainer.setAdapter(arrayAdapter)
         flingContainer.setFlingListener(object : SwipeFlingAdapterView.onFlingListener {
             lateinit var  userBefore: User
+
+            /**
+             * beim entfernen einer karte sspeichert er den entfernten Karte in userBefore
+             */
             override fun removeFirstObjectInAdapter() {
                 // this is the simplest way to delete an object from the Adapter (/AdapterView)
                 Log.d("LIST", "removed object!")
@@ -81,6 +86,9 @@ class MainPage_Lessor  : AppCompatActivity(){
                 arrayAdapter.notifyDataSetChanged()
             }
 
+            /**
+             * bei nach links swipen speichert er den like
+             */
             override fun onLeftCardExit(dataObject: Any) {
                 flingContainer.selectedItemPosition
                 Toast.makeText(this@MainPage_Lessor, "Like! ", Toast.LENGTH_SHORT).show()
@@ -88,16 +96,20 @@ class MainPage_Lessor  : AppCompatActivity(){
                 println(userBefore.firstname)
                 //ApartmentModel.insertMatch(Data.getApartment())
                 Data.setUser(userBefore)
-                ApartmentModel.insertMatch(Apartment("BadSalzuflen", "32107", "DetmolderWeg", "3",
-                    120.0f, true, 2, 750.0f, false, true,
-                   "HierwohnteeineBerühmtheitdasistwahrglaubensiemir.", "nkoetter@e-mail.de"))
+                ApartmentModel.insertMatch(Data.getApartment())
                 Data.setUser(null)
             }
 
+            /**
+             * macht er nichts
+             */
             override fun onRightCardExit(dataObject: Any) {
                 Toast.makeText(this@MainPage_Lessor, "Dislike!", Toast.LENGTH_SHORT).show()
             }
 
+            /**
+             * macht er nichts
+             */
             override fun onAdapterAboutToEmpty(itemsInAdapter: Int) {
                 // Ask for more data her
                 arrayAdapter.notifyDataSetChanged()
@@ -106,6 +118,9 @@ class MainPage_Lessor  : AppCompatActivity(){
 
             }
 
+            /**
+             * macht er nichts
+             */
             override fun onScroll(scrollProgressPercent: Float) {
 
             }
@@ -178,15 +193,4 @@ class MainPage_Lessor  : AppCompatActivity(){
         return super.onOptionsItemSelected(item)
     }
 
-    private fun loadData()
-    {
-//        val sharedPreferences: SharedPreferences = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
-//        if(sharedPreferences.contains("sharedPref")) {
-//            Data.setFilter(com.example.flatmatch.Data.Filter(sharedPreferences.getString("filterCity", null), sharedPreferences.getFloat("filterSizeMin", -1.0f),
-//                    sharedPreferences.getFloat("filterSizeMax", -1.0f), sharedPreferences.getInt("filterRoomsMin", -1), sharedPreferences.getInt("filterRoomsMax", -1),
-//                    sharedPreferences.getBoolean("filterPets", false), sharedPreferences.getFloat("filterCostsMin", -1.0f), sharedPreferences.getFloat("filterCostsMax", -1.0f),
-//                    sharedPreferences.getBoolean("filterCommercial", false), sharedPreferences.getBoolean("filterFurnishing", false)))
-//            println(Data.getFilter().city.toString())
-//        }
-    }
 }

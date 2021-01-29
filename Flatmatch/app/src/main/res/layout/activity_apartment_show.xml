@@ -24,7 +24,7 @@
                 android:id="@+id/cityApartmentShow_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name"
+                android:text="Stadt"
                 android:layout_weight="3"
                 android:textColor="#F000">
             </TextView>
@@ -48,7 +48,7 @@
                 android:id="@+id/zipApartmentShow_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vorname"
+                android:text="Zip"
                 android:layout_weight="3"
                 android:textColor="#F000">
             </TextView>
@@ -73,7 +73,7 @@
                 android:id="@+id/streetApartmentShow_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Personen"
+                android:text="Street"
                 android:layout_weight="3"
                 android:textColor="#F000">
             </TextView>
@@ -98,7 +98,7 @@
                 android:id="@+id/houseNumberApartmentShow_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Einkommen"
+                android:text="Hausnummer"
                 android:layout_weight="3"
                 android:textColor="#F000">
             </TextView>
@@ -123,7 +123,7 @@
                 android:id="@+id/costsApartmentShow_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Job"
+                android:text="Kosten"
                 android:layout_weight="3"
                 android:textColor="#F000">
             </TextView>
@@ -148,7 +148,7 @@
                 android:id="@+id/sizeApartmentShow_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Alter"
+                android:text="Größe"
                 android:layout_weight="3"
                 android:textColor="#F000">
             </TextView>
@@ -173,7 +173,7 @@
                 android:id="@+id/petApartmentShow_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Haustier"
+                android:text="Haustiere"
                 android:layout_weight="3"
                 android:textColor="#F000">
             </TextView>
@@ -199,7 +199,7 @@
                 android:id="@+id/commercialApartmentShow_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Schufa"
+                android:text="Commercial Usage"
                 android:layout_weight="3"
                 android:textColor="#F000">
             </TextView>
@@ -227,7 +227,7 @@
                 android:id="@+id/furnishingApartmentShow_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Schufa"
+                android:text="Einbau"
                 android:layout_weight="3"
                 android:textColor="#F000">
             </TextView>
@@ -255,7 +255,7 @@
                 android:id="@+id/descriptionApartmentShow_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Alter"
+                android:text="Beschreibung"
                 android:layout_weight="3"
                 android:textColor="#F000">
             </TextView>
@@ -270,7 +270,11 @@
             </EditText>
 
         </LinearLayout>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="left">
         <Button
             android:id="@+id/safe_apartmentShow_btn"
             android:layout_width="wrap_content"
@@ -287,6 +291,15 @@
             android:text="Löschen">
 
         </Button>
+
+        <Button
+            android:id="@+id/set_apartmentShow_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Auswählen">
+
+        </Button>
+    </LinearLayout>
 
     </LinearLayout>
     <com.google.android.material.navigation.NavigationView

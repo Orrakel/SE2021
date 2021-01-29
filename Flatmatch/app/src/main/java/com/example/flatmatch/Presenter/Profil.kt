@@ -17,6 +17,9 @@ class Profil: AppCompatActivity(){
 
     lateinit var toggle: ActionBarDrawerToggle
 
+    /**
+     * erstellt die Profil ansicht
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activitiy_profil)

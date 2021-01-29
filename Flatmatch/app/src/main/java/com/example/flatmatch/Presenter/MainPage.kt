@@ -36,7 +36,9 @@ class MainPage : AppCompatActivity(){
     lateinit var arrayAdapter: ArrayAdapter<Apartment>
 
 
-
+    /**
+     * erstellt die Ansicht für die swipen für ein User
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

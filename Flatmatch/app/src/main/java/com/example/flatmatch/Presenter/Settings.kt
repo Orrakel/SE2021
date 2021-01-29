@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activitiy_settings.*
 import kotlinx.android.synthetic.main.activity_apartment_show.*
 
 /**
- * Hier wäre die Einstellung Implemntiert
+ * Hier ist die Einstellung Implemntiert, man kann sich abmelden und passwort ändern
  */
 class Settings: AppCompatActivity(){
     lateinit var toggle: ActionBarDrawerToggle

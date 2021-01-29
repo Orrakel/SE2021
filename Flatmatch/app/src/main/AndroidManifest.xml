@@ -35,6 +35,9 @@
         <activity android:name=".Presenter.ApartmentList" />
         <activity android:name=".Presenter.MainPage_Lessor" />
         <activity android:name=".Presenter.ApartmentShow" />
+        <activity android:name=".Presenter.MatchList_Lessor"/>
+        <activity android:name=".Presenter.MatchShow_Lessor"/>
+        <activity android:name=".Presenter.SettingsLessor"/>
     </application>
 
 </manifest>

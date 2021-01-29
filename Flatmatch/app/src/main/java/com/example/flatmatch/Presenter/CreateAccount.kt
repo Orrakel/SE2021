@@ -16,7 +16,7 @@ import com.example.flatmatch.R
 import kotlinx.android.synthetic.main.activitiy_create_account.*
 
 /**
- * Hier wäre das Accounterstellen-Seite implementiert
+ * Hier ist das Accounterstellen-Seite implementiert
  */
 class CreateAccount: AppCompatActivity(){
 
@@ -45,8 +45,8 @@ class CreateAccount: AppCompatActivity(){
             {
                 if (password_et.text.toString() == passwordrp_et.text.toString()) {
                     val lessor = Lessor(email_et.text.toString(), null)
-                    LessorModel.insertNewUser(lessor, password_et.text.toString())
-                    println("CreateAccount" + Data.getLoggedInLessor())
+                    LessorModel.insertNewLessor(lessor, password_et.text.toString())
+                    println("CreateAccount" + Data.getLoggedInLessor().email)
                     val intent = Intent(this, ApartmentList::class.java)
                     startActivity(intent)
                 }
@@ -55,6 +55,10 @@ class CreateAccount: AppCompatActivity(){
 
     }
 
+    /**
+     * hier wird die radioId gewechselt wenn ein andere Button geklickt wird
+     * @param v, die view wo die Buttons sind
+     */
     fun checkButton(v: View)
     {
         val radioId = findViewById<RadioGroup>(R.id.createAccount_rg).checkedRadioButtonId

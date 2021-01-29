@@ -5,28 +5,28 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.flatmatch.Data.User
 import com.example.flatmatch.Model.ApartmentModel
 import com.example.flatmatch.R
-import kotlinx.android.synthetic.main.activitiy_main_page.*
-import kotlinx.android.synthetic.main.activitiy_main_page.navView
-import kotlinx.android.synthetic.main.activity_user_show.*
+import kotlinx.android.synthetic.main.activity_match_show_lessor.*
 
-class UserShow : AppCompatActivity(){
+/**
+ * zeigt Das Objekt an was angeklickt wurde.
+ *
+ */
+class MatchShow_Lessor : AppCompatActivity(){
 
     lateinit var toggle: ActionBarDrawerToggle
 
-    /**
-     * erstellt die ansicht für ein User
-     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user_show)
+        setContentView(R.layout.activity_match_show_lessor)
 
-        toggle = ActionBarDrawerToggle(this, user_drawerLayout,
-            R.string.open,
-            R.string.close
+        toggle = ActionBarDrawerToggle(this, MatchShowLessor_drawerLayout,
+                R.string.open,
+                R.string.close
         )
-        drawerLayout.addDrawerListener(toggle)
+        MatchShowLessor_drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -35,29 +35,28 @@ class UserShow : AppCompatActivity(){
             when(it.itemId)
             {
                 R.id.mProfil -> startActivity(Intent(this, Profil::class.java))
-                R.id.mMatches -> startActivity(Intent(this, MatchList::class.java))
+                R.id.mMatches -> startActivity(Intent(this, MatchList_Lessor::class.java))
                 R.id.mFilter -> startActivity(Intent(this, Filter::class.java))
                 R.id.mSettings -> startActivity(Intent(this, Settings::class.java))
             }
             true
         }
 
-        val users = ApartmentModel.getLessorMatches().get(intent.getIntExtra("position", -1))
-
-        emailUserShow_tv.text = "Stadt: " + users.city
-        ageUserShow_tv.text = "PLZ: " + users.zip
-        firstnameUserShow_tv.text = "Straße: " + users.street
-        lastnameUserShow_tv.text =  users.housenumber
-        incomeUserShow_tv.text = "Größe: " + users.size.toString()
-        jobShow_tv.text = "Haustier: " + users.petallowedYesNo
-        ShufaUserShow_tv.text = "Räume: " + users.room.toString()
-        petUserShow_tv.text = "Kosten: " + users.costs.toString()
-        personsUserShow_tv.text = "Commercial Usage: " + users.commercialusageYesNo
-
+        //val user = ApartmentModel.getLessorMatches().get(intent.getIntExtra("position", -1))
+        val user = User("anolting@e-mail.de", "Alex", "Sucher", 27, "test", 1000.0, "bubun", true, true, 1)
+        firstnameMatchShowLessor_tv.text = "Name: " + user.firstname
+        lastnameMatchShowLessor_tv.text = user.lastname
+        incomeMatchShowLessor_tv.text = "Einkommen: " + user.income.toString()
+        jobMatchShowLessor_tv.text =  "Job" + user.job
+        ageMatchShowLessor_tv.text = "Alter: " + user.age.toString()
+        arePetAllowedMatchShowLessor_tv.text = "Haustier: " + user.petYesNo
+        schufaMatchShowLessor_tv.text = "Schufa: " + user.schufaYesNo.toString()
+        personsMatchShowLessor_tv.text = "Personen: " + user.persons.toString()
 
 
 
-        userShow_chat_btn.setOnClickListener {
+
+        matchShow_chat_btn.setOnClickListener {
 
             startActivity(Intent(this, Chat::class.java))
         }

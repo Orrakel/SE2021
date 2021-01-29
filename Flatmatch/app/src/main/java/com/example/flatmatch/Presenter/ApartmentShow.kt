@@ -7,19 +7,16 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.flatmatch.Data.Apartment
 import com.example.flatmatch.Data.Data
-import com.example.flatmatch.Data.User
-import com.example.flatmatch.Model.ApartmentModel
-import com.example.flatmatch.Model.UserModel
 import com.example.flatmatch.R
-import kotlinx.android.synthetic.main.activitiy_main_page.*
 import kotlinx.android.synthetic.main.activitiy_match_show.*
-import kotlinx.android.synthetic.main.activitiy_profil.*
 import kotlinx.android.synthetic.main.activity_apartment_show.*
 
 class ApartmentShow: AppCompatActivity(){
 
     lateinit var toggle: ActionBarDrawerToggle
-
+    /**
+     * Erstellung der Ansicht einer Wohung die der Vermieter angeklickt hat
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_apartment_show)
@@ -37,18 +34,18 @@ class ApartmentShow: AppCompatActivity(){
             when(it.itemId)
             {
                 R.id.mHome -> startActivity(Intent(this, MainPage_Lessor::class.java))
-                R.id.mMatches -> startActivity(Intent(this, MatchList::class.java))
+                R.id.mMatches -> startActivity(Intent(this, MatchList_Lessor::class.java))
                 R.id.mObjects -> startActivity(Intent(this, ApartmentList::class.java))
-                R.id.mSettings -> startActivity(Intent(this, Settings_lessor::class.java))
+                R.id.mSettings -> startActivity(Intent(this, SettingsLessor::class.java))
             }
             true
         }
 
         //php und funktionen funktionieren nicht oder sind noch nicht da
-        //val user = Data.getLoggedInLessor().apartments[intent.getIntExtra("position", -1)]
-        val apartment = Apartment("BadSalzuflen", "32107", "DetmolderWeg", "3",
-                120.0f, true, 2, 750.0f, false, true,
-                "HierwohnteeineBerühmtheitdasistwahrglaubensiemir.", "nkoetter@e-mail.de")
+        var apartment = Data.getLoggedInLessor().apartments[intent.getIntExtra("position", -1)]
+//        val apartment = Apartment("BadSalzuflen", "32107", "DetmolderWeg", "3",
+//                120.0f, true, 2, 750.0f, false, true,
+//                "HierwohnteeineBerühmtheitdasistwahrglaubensiemir.", "nkoetter@e-mail.de")
 
         cityApartmentShow_et.setText(apartment.city.toString())
         streetApartmentShow_et.setText(apartment.street.toString())
@@ -75,7 +72,7 @@ class ApartmentShow: AppCompatActivity(){
 //            Data.getLoggedInLessor().apartments.remove(apartment)
 //            Data.getLoggedInLessor().apartments.add(apartment2)
 //            ApartmentModel.updateApartment(apartment2)
-
+            apartment = apartment2
             startActivity(Intent(this, ApartmentList::class.java ))
         }
 
@@ -85,6 +82,12 @@ class ApartmentShow: AppCompatActivity(){
 //            ApartmentModel.deleteApartment(apartment)
 //            Data.getLoggedInLessor().apartments.remove(apartment)
 
+            startActivity(Intent(this, ApartmentList::class.java ))
+        }
+
+        set_apartmentShow_btn.setOnClickListener {
+
+            Data.setApartment(apartment)
             startActivity(Intent(this, ApartmentList::class.java ))
         }
     }

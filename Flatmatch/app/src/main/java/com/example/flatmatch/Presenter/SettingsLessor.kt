@@ -8,17 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.flatmatch.Data.Data
 import com.example.flatmatch.MainActivity
 import com.example.flatmatch.R
-import kotlinx.android.synthetic.main.activitiy_main_page.*
-import kotlinx.android.synthetic.main.activitiy_main_page.drawerLayout
-import kotlinx.android.synthetic.main.activitiy_main_page.navView
-import kotlinx.android.synthetic.main.activitiy_settings.*
-import kotlinx.android.synthetic.main.activity_apartment_show.*
 import kotlinx.android.synthetic.main.activity_settings_lessor.*
 
 /**
- * Hier wäre die Einstellung Implemntiert
+ * Hier ist die Einstellung für den Vermieter Implemntiert, man kann sich abmeloden und passwort ändern
  */
-class Settings_lessor: AppCompatActivity(){
+class SettingsLessor: AppCompatActivity(){
     lateinit var toggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,9 +34,9 @@ class Settings_lessor: AppCompatActivity(){
                 when(it.itemId)
                 {
                     R.id.mHome -> startActivity(Intent(this, MainPage_Lessor::class.java))
-                    R.id.mMatches -> startActivity(Intent(this, MatchList::class.java))
+                    R.id.mMatches -> startActivity(Intent(this, MatchList_Lessor::class.java))
                     R.id.mObjects -> startActivity(Intent(this, ApartmentList::class.java))
-                    R.id.mSettings -> startActivity(Intent(this, Settings_lessor::class.java))
+                    R.id.mSettings -> startActivity(Intent(this, SettingsLessor::class.java))
                 }
                 true
             }

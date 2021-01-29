@@ -23,7 +23,11 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class ApartmentModel {
-
+    /**
+     * Eine Liste von allen Wohnungen wird aus der Datenbank abgerufen, erzeugt und zurückgegeben
+     *
+     * @return Liste von allen Wohnungen
+     */
     public static ArrayList<Apartment> getAllApartments() {
         String input = "";
 
@@ -66,7 +70,12 @@ public class ApartmentModel {
 
         return apartments;
     }
-
+    /**
+     * Eine Liste von allen Wohnungen, die von dem eingeloggten Benutzer noch nicht geliked oder
+     * gematched wurde, wird aus der Datenbank abgerufen, erzeugt und zurückgegeben
+     *
+     * @return List von Wohnungen, die weder in den Likes noch den Matches sind
+     */
     public static ArrayList<Apartment> getApartments() {
         String input = "";
 
@@ -78,7 +87,8 @@ public class ApartmentModel {
         ArrayList<Apartment> apartments = null;
 
         try {
-            selectUser = new URL("http://" + Data.getIPAdress() + "/flatmatch/selectApartment.php");
+            selectUser = new URL("http://" + Data.getIPAdress()
+                    + "/flatmatch/selectApartment.php?email=" + Data.getLoggedInUser().getEmail());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -109,7 +119,12 @@ public class ApartmentModel {
 
         return apartments;
     }
-
+    /**
+     * Eine Liste von allen Wohnungen, die zu dem eingeloggten Vermieter gehören,
+     * wird aus der Datenbank abgerufen, erzeugt und zurückgegeben
+     *
+     * @return Liste von Wohnung von einem Vermieter
+     */
     public static ArrayList<Apartment> getLessorApartments(String email) {
         String input = "";
 
@@ -152,7 +167,12 @@ public class ApartmentModel {
 
         return apartments;
     }
-
+    /**
+     * Eine Lste von Wohnung, welche von dem eingeloggten Benutzer geliked wurden,
+     * wird abgerufen, erzeugt und zurückgegeben
+     *
+     * @return Liste von gelikten Wohnungen
+     */
     public static ArrayList<Apartment> getLikes() {
         String input = "";
 
@@ -195,7 +215,12 @@ public class ApartmentModel {
 
         return apartments;
     }
-
+    /**
+     * Eine Lste von Wohnung, welche von dem eingeloggten Benutzer gematched wurden,
+     * wird abgerufen, erzeugt und zurückgegeben
+     *
+     * @return Liste von gemachted Wohnungen
+     */
     public static ArrayList<Apartment> getMatches() {
         String input = "";
 
@@ -207,7 +232,7 @@ public class ApartmentModel {
         ArrayList<Apartment> apartments = null;
 
         try {
-            selectUser = new URL("http://" + Data.getIPAdress() + "/flatmatch/selectLikes.php?email=" + Data.getLoggedInUser().getEmail());
+            selectUser = new URL("http://" + Data.getIPAdress() + "/flatmatch/selectMatches.php?email=" + Data.getLoggedInUser().getEmail());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -240,7 +265,13 @@ public class ApartmentModel {
     }
 
 
-
+    /**
+     * Erzeugt aus einem JSON-Objekt eine Liste von Apartment-Objekten
+     *
+     * @param input eine JSON-Liste von Apartments
+     * @return Eine Liste von Apartment-Objekten
+     * @throws JSONException
+     */
     private static ArrayList<Apartment> buildApartmentList(String input) throws JSONException {
         ArrayList<Apartment> apartments = new ArrayList<>();
         JSONObject apartmentsInput = new JSONObject(input);
@@ -264,7 +295,11 @@ public class ApartmentModel {
 
         return apartments;
     }
-
+    /**
+     * Eine neue Wohnung wird in die Datenbank eingefügt
+     *
+     * @param newApartment Neu einzufügende Wohnung
+     */
     public static void insertApartment(Apartment newApartment) {
         String input = "";
 
@@ -299,7 +334,11 @@ public class ApartmentModel {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Eine neu gelikte Wohnung wird in die Datenbank eingefügt.
+     *
+     * @param newLikedApartment eine neu gelikte Wohnung
+     */
     public static void insertLike(Apartment newLikedApartment) {
         String input = "";
 
@@ -329,7 +368,11 @@ public class ApartmentModel {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Ein neues Match wird in die Datenbank aufgenommen
+     *
+     * @param newApartmentMatch ein gematches Apartment
+     */
     public static void insertMatch(Apartment newApartmentMatch) {
         String input = "";
 
@@ -360,7 +403,21 @@ public class ApartmentModel {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Wohnungen werden gefiltert aus der Datenbank abgefragt, erzeugt und bereitgestellt
+     *
+     * @param city Stadt
+     * @param minSize minimale größe
+     * @param maxSize maximale größe
+     * @param minRooms Mindestanzahl an Räumen
+     * @param maxRooms Maximalanzahl an Räumen
+     * @param petsAllowed sind Tiere in der Wohnung erlaubt
+     * @param minCosts Mindestkosten
+     * @param maxCosts Maximalkosten
+     * @param commercialUsage ist gewerbliche Nutzung erlaubt
+     * @param furnishing ist die Wohnung eingerichtet
+     * @return Liste mit passenden Wohnungen
+     */
     public static ArrayList<Apartment> getFilteredApartments(String city, double minSize,
                                                              double maxSize, int minRooms,
                                                              int maxRooms, boolean petsAllowed,

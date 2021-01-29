@@ -12,6 +12,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -78,8 +79,7 @@ public class LessorModel {
     }
 
     /**
-     * Der String, aus der Datenbank, wird zu einem Player umgewandelt.
-     * Dafür werden auch die Deckinformationen ausgewertet.
+     * Der String, aus der Datenbank, wird zu einem Lessor umgewandelt.
      *
      * @param input Der Datenbank-String
      */
@@ -95,7 +95,12 @@ public class LessorModel {
         System.out.println("BuildLessor " + lessor);
         Data.setLessor(lessor);
     }
-
+    /**
+     * Ein neuer Vermiteter wird in die Datenbank aufgenommen
+     *
+     * @param newLessor Neuer Vermieter
+     * @param password Passwort des neuen Vermieter
+     */
     public static void insertNewUser(Lessor newLessor, String password) {
         String input = "";
 
@@ -122,5 +127,157 @@ public class LessorModel {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Eine Liste von Benutzern wird aus einem JSON-String erzeugt
+     *
+     * @param input JSON-String
+     * @return Benutzerliste
+     * @throws JSONException
+     */
+    private static ArrayList<User> buildUserList(String input) throws JSONException {
+        ArrayList<User> users = new ArrayList<>();
+        JSONObject userInput = new JSONObject(input);
+
+        JSONObject apartmentsInput = new JSONObject(input);
+        JSONArray allUsers = apartmentsInput.getJSONArray("users");
+
+        for( int i = 0 ; i < allUsers.length()-1 ; i++) {
+            User user = new User(allUsers.getJSONObject(i).getString("email"),
+                    allUsers.getJSONObject(i).getString("firstname"),
+                    allUsers.getJSONObject(i).getString("lastname"),
+                    allUsers.getJSONObject(i).getInt("age"),
+                    allUsers.getJSONObject(i).getString("picture"),
+                    allUsers.getJSONObject(i).getDouble("income"),
+                    allUsers.getJSONObject(i).getString("firstname"),
+                    allUsers.getJSONObject(i).getString("schufa").equals("yes"),
+                    allUsers.getJSONObject(i).getString("pet").equals("yes"),
+                    allUsers.getJSONObject(i).getInt("persons"));
+
+            users.add(user);
+        }
+
+        return users;
+    }
+
+    public static ArrayList<User> getMatchesFromApartment(Apartment apartment) {
+        String input = "";
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        URL selectUser = null;
+        BufferedReader br = null;
+
+        try {
+            selectUser = new URL("http://" + Data.getIPAdress() +
+                    "/flatmatch/selectApartmentMatches.php?city=" + apartment.getCity() + "&zip=" + apartment.getZip() +
+                    "&street=" + apartment.getStreet() + "&housenumber=" + apartment.getHousenumber());
+
+            System.out.println("http://" + Data.getIPAdress() +
+                    "/flatmatch/selectApartmentMatches.php?city=" + apartment.getCity() + "&zip=" + apartment.getZip() +
+                    "&street=" + apartment.getStreet() + "&housenumber=" + apartment.getHousenumber());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            br = new BufferedReader(new InputStreamReader(selectUser.openStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            input = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Login: " + input);
+
+        try {
+            return buildUserList(input);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    /**
+     * Ein neuer Vermiteter wird in die Datenbank aufgenommen
+     *
+     * @param newLessor Neuer Vermieter
+     * @param password Passwort des neuen Vermieter
+     */
+    public static void insertNewLessor(Lessor newLessor, String password) {
+        String input = "";
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        URL selectUser = null;
+        BufferedReader br = null;
+
+        String sql = "INSERT INTO Lessor (email, password) VALUES " +
+                "('" + newLessor.getEmail() + "', '"+ password + "')";
+
+        try {
+            selectUser = new URL("http://" + Data.getIPAdress() + "/flatmatch/insert.php?sql=" + sql);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Alle Benutzer, welche ein Apartment liken, werden aus der Datenbank ausgelesen und
+     * als Liste zurückgegeben
+     *
+     * @param apartment eine Wohnung
+     * @return Eine Liste von Wohnungen
+     */
+    public static ArrayList<User> getLikesFromApartment(Apartment apartment) {
+        String input = "";
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        URL selectUser = null;
+        BufferedReader br = null;
+
+        try {
+            selectUser = new URL("http://" + Data.getIPAdress() +
+                    "/flatmatch/selectApartmentLikes.php?city=" + apartment.getCity() + "&zip=" + apartment.getZip() +
+                    "&street=" + apartment.getStreet() + "&housenumber=" + apartment.getHousenumber());
+
+            System.out.println("http://" + Data.getIPAdress() +
+                    "/flatmatch/selectApartmentLikes.php?city=" + apartment.getCity() + "&zip=" + apartment.getZip() +
+                    "&street=" + apartment.getStreet() + "&housenumber=" + apartment.getHousenumber());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            br = new BufferedReader(new InputStreamReader(selectUser.openStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            input = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Login: " + input);
+
+        try {
+            return buildUserList(input);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
